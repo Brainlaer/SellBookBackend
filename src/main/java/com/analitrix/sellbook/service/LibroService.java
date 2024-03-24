@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.analitrix.sellbook.dto.LibroDto;
 import com.analitrix.sellbook.entity.Categoria;
 import com.analitrix.sellbook.entity.Libro;
+import com.analitrix.sellbook.repository.CategoriaRepositorio;
 import com.analitrix.sellbook.repository.LibroRepository;
 
 @Service
@@ -17,6 +18,9 @@ public class LibroService {
 
 	@Autowired
 	private LibroRepository libroRepository;
+	
+	@Autowired
+	private CategoriaRepositorio categoriaRepositorio;
 
 	public ResponseEntity<String> insertLibro(Libro libro) {
 		Optional<Libro> optionalLibro = libroRepository.findById(libro.getId());
@@ -47,10 +51,15 @@ public class LibroService {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} else {
 			List<LibroDto> listaLibrosDto = new ArrayList<>();
+			int maximoLibros=4;
 			for (Libro libro : listaLibros) {
 				LibroDto librodto = new LibroDto(libro.getTitulo(), libro.getAutor(), libro.getCosto(),
 						libro.getImage());
 				listaLibrosDto.add(librodto);
+				maximoLibros--;
+				if(maximoLibros==0) {
+					break;
+				}
 			}
 			return new ResponseEntity<>(listaLibrosDto, HttpStatus.OK);
 		}
@@ -89,8 +98,10 @@ public class LibroService {
 		}
 	}
 
-	public ResponseEntity<List<LibroDto>> findByCategoria(Categoria categoria) {
-		List<Libro> listaLibros = libroRepository.findByCategoria(categoria);
+	public ResponseEntity<List<LibroDto>> findByCategoria(Long categoria) {
+		Optional<Categoria> _cate = categoriaRepositorio.findById(categoria);
+		Categoria _categoria = _cate.get();
+		List<Libro> listaLibros = libroRepository.findByCategoria(_categoria);
 
 		if (listaLibros.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);

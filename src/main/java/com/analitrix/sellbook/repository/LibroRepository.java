@@ -10,5 +10,5 @@ public interface LibroRepository extends JpaRepository<Libro, Long>{
 	List<Libro> findAllByOrderByFechaModificacionDesc();
 	List<Libro> findByTituloContainingIgnoreCase (String cadena);
 	List<Libro> findByAutorContainingIgnoreCase (String cadena);
-	List<Libro> findByCategoria (Categoria categoria);
+	List<Libro> findByCategoria(Categoria categoria);
 }

@@ -35,7 +35,7 @@ public class LibroController {
 		return libroService.findById(id);
 	}
 
-	@GetMapping("/listaLibros")
+	@GetMapping("/librosRecientes")
 	public ResponseEntity<List<LibroDto>> findAllByOrderByFechaModificacionDesc() {
 		return libroService.findAllByOrderByFechaModificacionDesc();
 	}
@@ -51,7 +51,7 @@ public class LibroController {
 	}
 
 	@GetMapping("/categoria")
-	public ResponseEntity<List<LibroDto>> findByCategoria(@RequestBody Categoria categoria) {
+	public ResponseEntity<List<LibroDto>> findByCategoria(@PathVariable String categoria) {
 		return libroService.findByCategoria(categoria);
 	}
 
