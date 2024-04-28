@@ -3,6 +3,7 @@ package com.analitrix.sellbook.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +24,11 @@ public class LibroService {
 	private CategoriaRepositorio categoriaRepositorio;
 
 	public ResponseEntity<String> insertLibro(Libro libro) {
+
 		Optional<Libro> optionalLibro = libroRepository.findById(libro.getId());
 
 		if (optionalLibro.isEmpty()) {
+
 			libroRepository.save(libro);
 			return new ResponseEntity<>("¡Guardado con exito!", HttpStatus.OK);
 		} else {
