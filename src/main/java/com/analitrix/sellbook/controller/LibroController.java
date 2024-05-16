@@ -2,6 +2,7 @@ package com.analitrix.sellbook.controller;
 
 import java.util.List;
 
+import com.analitrix.sellbook.dto.LibroFindById;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,13 +32,18 @@ public class LibroController {
 	}
 
 	@GetMapping("/id/{id}")
-	public ResponseEntity<Libro> findById(@PathVariable("id") Long id) {
+	public ResponseEntity<LibroFindById> findById(@PathVariable("id") Long id) {
 		return libroService.findById(id);
 	}
 
 	@GetMapping("/librosRecientes")
 	public ResponseEntity<List<LibroDto>> findAllByOrderByFechaModificacionDesc() {
 		return libroService.findAllByOrderByFechaModificacionDesc();
+	}
+
+	@GetMapping("/findAll")
+	public ResponseEntity<List<Libro>> findAll() {
+		return libroService.findAll();
 	}
 
 	@GetMapping("/buscar/titulo/{cadena}")

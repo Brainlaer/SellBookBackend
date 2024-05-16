@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.analitrix.sellbook.dto.LibroFindById;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,14 +37,26 @@ public class LibroService {
 		}
 	}
 
-	public ResponseEntity<Libro> findById(Long id) {
+	public ResponseEntity<LibroFindById> findById(Long id) {
 		Optional<Libro> optionalLibro = libroRepository.findById(id);
 		Libro libro = optionalLibro.get();
 
+
 		if (libro != null) {
-			return new ResponseEntity<>(libro, HttpStatus.OK);
+			LibroFindById libroFindById = new LibroFindById(libro.getId(), libro.getTitulo(),libro.getAnioPublicacion(),libro.getUnidades(),libro.getEditorial(), libro.getCosto(), libro.getAutor(), libro.getImage(),libro.getCategoria());
+			return new ResponseEntity<>(libroFindById, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	public ResponseEntity<List<Libro>> findAll() {
+		List<Libro> listaLibros = libroRepository.findAllByOrderByFechaModificacionDesc();
+
+		if (listaLibros.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<>(listaLibros, HttpStatus.OK);
 		}
 	}
 
@@ -126,7 +139,7 @@ public class LibroService {
 		if (_libro != null) {
 			_libro.setId(libro.getId());
 			_libro.setTitulo(libro.getTitulo());
-			_libro.setAñoPublicacion(libro.getAñoPublicacion());
+			_libro.setAnioPublicacion(libro.getAnioPublicacion());
 			_libro.setUnidades(libro.getUnidades());
 			_libro.setEditorial(libro.getEditorial());
 			_libro.setCosto(libro.getCosto());

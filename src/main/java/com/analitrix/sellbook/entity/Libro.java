@@ -28,8 +28,8 @@ public class Libro {
 	@Column(unique = true)
 	private Long id;
 	private String titulo;
-	@Column(name="año_publicacion")
-	private Long añoPublicacion;
+	@Column(name="anio_publicacion")
+	private Long anioPublicacion;
 	private boolean disponibilidad;
 	private Long unidades;
 	private String editorial;
