@@ -2,7 +2,7 @@ package com.analitrix.sellbook.service;
 
 
 import com.analitrix.sellbook.entity.Category;
-import com.analitrix.sellbook.repository.CategoryRepositorio;
+import com.analitrix.sellbook.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +12,10 @@ import java.util.List;
 public class CategoryService {
 
     @Autowired
-    CategoryRepositorio categoryRepositorio;
+    CategoryRepository categoryRepository;
 
     public List<Category> allCategories(){
-        return categoryRepositorio.findAll();
+        return categoryRepository.findAll();
     }
 
 }

@@ -1,8 +1,6 @@
 package com.analitrix.sellbook.controller;
 
-import com.analitrix.sellbook.entity.Categoria;
 import com.analitrix.sellbook.entity.Category;
-import com.analitrix.sellbook.service.CategoriaService;
 import com.analitrix.sellbook.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("/category")
 @CrossOrigin(origins = "http://localhost:4200/")
 
 public class CategoryController {
@@ -21,7 +19,7 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/all")
+    @GetMapping("/findAll")
     public List<Category> allCategories(){
         return categoryService.allCategories();
     }

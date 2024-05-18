@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "book")
+@Table(name = "books")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,8 +28,8 @@ public class Book {
 	@Column(unique = true)
 	private Long isxn;
 	private String title;
-	@Column(name="date_posted")
-	private Long datePosted;
+	@Column(name="publication_date")
+	private Long publicationDate;
 	private boolean available;
 	private Long units;
 	private String editorial;
@@ -37,8 +37,8 @@ public class Book {
 	private String author;
 	private String image;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column (name="date_modified")
-	private Date dateModified;
+	@Column (name="modification_date")
+	private Date modificationDate;
 	@ManyToOne
 	@JoinColumn(name = "id_category")
 	private Category category;
@@ -62,6 +62,6 @@ public class Book {
     }
     
     public Date modify() {
-    	return this.dateModified = new Date();
+    	return this.modificationDate = new Date();
     }
 }

@@ -13,7 +13,7 @@ import lombok.Setter;
 public class BookDto{
     private Long isxn;
     private String title;
-    private Long datePosted;
+    private Long publicationDate;
     private Long units;
     private String editorial;
     private double cost;

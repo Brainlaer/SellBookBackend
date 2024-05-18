@@ -16,24 +16,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "facturas")
+@Table(name = "invoices")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Factura {
+public class Invoice {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Long usuario;
-	@Column(name = "fecha_expedicion")
-	private Date fechaExpedicion;
-	@Column(name = "costo_total")
-	private double costoTotal;
+	private Long user;
+	@Column(name = "expedition_date")
+	private Date expeditionDate;
+	@Column(name = "total_cost")
+	private double totalCost;
 	@OneToOne
 	@JoinColumn(name = "id_guia")
-	private Guia guia;
+	private Tracking tracking;
 	
 	@PrePersist
 	public void prePersist() {
