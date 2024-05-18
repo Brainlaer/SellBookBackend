@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LibroIdDto {
-	private Long id;
-	
+public class BookDtoId{
+	private Long isxn;
 }

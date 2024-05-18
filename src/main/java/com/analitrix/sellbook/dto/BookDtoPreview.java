@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LibroDto{
+public class BookDtoPreview{
 	
-	private String titulo;
-	private String autor;
-	private double costo;
+	private String title;
+	private String author;
+	private double cost;
 	private String image;
 }

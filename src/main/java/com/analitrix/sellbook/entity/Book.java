@@ -17,51 +17,51 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "libros")
+@Table(name = "book")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Libro {
+public class Book {
 	
 	@Id
 	@Column(unique = true)
-	private Long id;
-	private String titulo;
-	@Column(name="anio_publicacion")
-	private Long anioPublicacion;
-	private boolean disponibilidad;
-	private Long unidades;
+	private Long isxn;
+	private String title;
+	@Column(name="date_posted")
+	private Long datePosted;
+	private boolean available;
+	private Long units;
 	private String editorial;
-	private double costo;
-	private String autor;
+	private double cost;
+	private String author;
 	private String image;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column (name="fecha_modificacion")
-	private Date fechaModificacion;
+	@Column (name="date_modified")
+	private Date dateModified;
 	@ManyToOne
-	@JoinColumn(name = "id_categoria")
-	private Categoria categoria;
+	@JoinColumn(name = "id_category")
+	private Category category;
 	
     @PrePersist
     public void prePersist() {
-        modificar();
-        establecerdisponible();
+        modify();
+        setAvailability();
     }
     
-    public boolean establecerdisponible() {
-        if(unidades>=1) {
-        	return this.disponibilidad=true;
+    public boolean setAvailability() {
+        if(units>=1) {
+        	return this.available=true;
         }else {
-        	return this.disponibilidad=false;
+        	return this.available=false;
         }
     }
     
-    public Long vender() {
-    	return this.unidades=this.unidades-1;
+    public Long Sell() {
+    	return this.units=this.units-1;
     }
     
-    public Date modificar() {
-    	return this.fechaModificacion = new Date();
+    public Date modify() {
+    	return this.dateModified = new Date();
     }
 }

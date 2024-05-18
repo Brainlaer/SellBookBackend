@@ -56,6 +56,11 @@
         	<groupId>org.springframework.boot</groupId>
        		<artifactId>spring-boot-devtools</artifactId>
     	</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -65,15 +70,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				
 				<configuration>
-                <source>1.8</source> <!-- depending on your project -->
-                <annotationProcessorPaths>
-                    <path>
-                        <groupId>org.mapstruct</groupId>
-                        <artifactId>mapstruct-processor</artifactId>
-                        <version>${org.mapstruct.version}</version>
-                    </path>
-                    <!-- other annotation processors -->
-                </annotationProcessorPaths>
             </configuration>
 			</plugin>
 		</plugins>
