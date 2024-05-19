@@ -57,7 +57,7 @@ public class Book {
         }
     }
     
-    public Long Sell() {
+    public Long sell() {
     	return this.units=this.units-1;
     }
     

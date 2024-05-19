@@ -10,22 +10,23 @@ import lombok.Setter;
 import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "users")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario {
+public class User {
 	
 	@Id
 	@Column(unique = true)
 	private Long id;
-	private String nombre;
-	private String apellido;
+	private String name;
+	private String surname;
 	@Column(unique = true)
-	private Long telefono;
+	private Long phone;
 	@Column(unique = true)
-	private String email;
-	private String contraseña;
-	private String direccionDomiciliaria;
+	private String mail;
+	private String password;
+	@Column(name="home_address")
+	private String homeAddress;
 }

@@ -31,16 +31,15 @@ public class Invoice {
 	private Date expeditionDate;
 	@Column(name = "total_cost")
 	private double totalCost;
-	@OneToOne
-	@JoinColumn(name = "id_guia")
-	private Tracking tracking;
+	private String tracking;
+
 	
 	@PrePersist
 	public void prePersist() {
-		expedir();
+		expedite();
 	}
 	
-	public Date expedir() {
-		return this.fechaExpedicion=new Date();
+	public Date expedite() {
+		return this.expeditionDate=new Date();
 	}
 }

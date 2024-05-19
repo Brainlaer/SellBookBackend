@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRepository extends JpaRepository<Book, Long>{
 	
-	List<Book> findAllByOrderByDateModifiedDesc();
+	List<Book> findAllByOrderByModificationDateDesc();
 	List<Book> findByTitleContainingIgnoreCase (String string);
 	List<Book> findByAuthorContainingIgnoreCase (String string);
 	List<Book> findByCategory(Category category);

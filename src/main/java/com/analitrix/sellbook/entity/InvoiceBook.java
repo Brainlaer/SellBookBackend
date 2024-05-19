@@ -14,20 +14,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
-@Table(name="factura_item")
+@Table(name="invoice_books")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FacturaItem {
+public class InvoiceBook {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String titulo;
+	private String title;
 	@Column(nullable = true)
-	private double costo;
+	private double cost;
 	@ManyToOne
-	@JoinColumn(name = "id_factura")
-	private Factura factura;
+	@JoinColumn(name = "id_invoice")
+	private Invoice invoice;
 }

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
-@CrossOrigin(origins = "http://localhost:4200/")
+@RequestMapping("/sellbook/category")
+@CrossOrigin(origins = "*")
 
 public class CategoryController {
 
@@ -20,8 +20,8 @@ public class CategoryController {
     CategoryService categoryService;
 
     @GetMapping("/findAll")
-    public List<Category> allCategories(){
-        return categoryService.allCategories();
+    public List<Category> findAll(){
+        return categoryService.findAll();
     }
 
 }

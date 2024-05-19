@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.analitrix.sellbook.dto.BookDto;
-import com.analitrix.sellbook.dto.BookDtoId;
 import com.analitrix.sellbook.dto.BookDtoPreview;
 import com.analitrix.sellbook.entity.Book;
 import com.analitrix.sellbook.entity.Category;
 import com.analitrix.sellbook.repository.BookRepository;
-import com.analitrix.sellbook.repository.CategoryRepositorio;
+import com.analitrix.sellbook.repository.CategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,7 @@ public class BookService {
 	private BookRepository bookRepository;
 	
 	@Autowired
-	private CategoryRepositorio categoryRepositorio;
+	private CategoryRepository categoryRepository;
 
 	public ResponseEntity<String> insertBook(BookDto bookDto) {
 		Optional<Book> book = bookRepository.findById(bookDto.getIsxn());
@@ -53,7 +52,7 @@ public class BookService {
 	}
 
 	public ResponseEntity<List<BookDto>> findAll() {
-		List<Book> bookList = bookRepository.findAllByOrderByDateModifiedDesc();
+		List<Book> bookList = bookRepository.findAllByOrderByModificationDateDesc();
 
 		if (!bookList.isEmpty()) {
 			List<BookDto> bookDtoList = new ArrayList<>();
@@ -70,7 +69,7 @@ public class BookService {
 	}
 
 	public ResponseEntity<List<BookDtoPreview>> findRecentBooks() {
-		List<Book> bookList = bookRepository.findAllByOrderByDateModifiedDesc();
+		List<Book> bookList = bookRepository.findAllByOrderByModificationDateDesc();
 
 		if (!bookList.isEmpty()) {
 			List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
@@ -126,7 +125,7 @@ public class BookService {
 	}
 
 	public ResponseEntity<List<BookDtoPreview>> findByCategory(Long idCategory) {
-		Optional<Category> category = categoryRepositorio.findById(idCategory);
+		Optional<Category> category = categoryRepository.findById(idCategory);
 		Category categoryFound = category.get();
 		List<Book> bookList = bookRepository.findByCategory(categoryFound);
 
