@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping ("/sellbook/usuario")
+@RequestMapping ("/sellbook/user")
 @CrossOrigin(origins = "*")
 public class UserController {
 	

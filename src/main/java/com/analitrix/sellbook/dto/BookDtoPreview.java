@@ -10,7 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDtoPreview{
-	
+
+	private Long isxn;
 	private String title;
 	private String author;
 	private double cost;

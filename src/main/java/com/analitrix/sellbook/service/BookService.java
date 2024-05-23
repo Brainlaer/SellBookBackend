@@ -1,6 +1,7 @@
 package com.analitrix.sellbook.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,11 +41,13 @@ public class BookService {
 	}
 
 	public ResponseEntity<BookDto> findById(Long isxnBook) {
-		Optional<Book> book = bookRepository.findById(isxnBook);
+		Book book = bookRepository.findByIsxn(isxnBook);
 
-		if (book.isEmpty()) {
+		if (book!=null) {
 			ModelMapper modelMapper = new ModelMapper();
 			BookDto bookToReturn = modelMapper.map(book, BookDto.class);
+			bookToReturn.setCategory(book.getCategory());
+
 			return new ResponseEntity<>(bookToReturn, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -90,33 +93,22 @@ public class BookService {
 		}
 	}
 
-	public ResponseEntity<List<BookDtoPreview>> findByTitle(String string) {
-		List<Book> bookList = bookRepository.findByTitleContainingIgnoreCase(string);
+	public ResponseEntity<List<BookDtoPreview>> findByAuthorYTitle(String string) {
+		List<Book> bookListAuthor = bookRepository.findByAuthorContainingIgnoreCase(string);
+		List<Book> bookListTitle = bookRepository.findByTitleContainingIgnoreCase(string);
 
-		if (!bookList.isEmpty()) {
+		if (!bookListAuthor.isEmpty()||!bookListTitle.isEmpty()) {
 			List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
 			ModelMapper modelMapper = new ModelMapper();
 
-			for (Book book : bookList) {
+			for (Book book : bookListTitle) {
 				BookDtoPreview bookDtoPreview = modelMapper.map(book, BookDtoPreview.class);
 				bookDtoPreviewList.add(bookDtoPreview);
-			}
-			return new ResponseEntity<>(bookDtoPreviewList, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-	}
-
-	public ResponseEntity<List<BookDtoPreview>> findByAuthor(String string) {
-		List<Book> bookList = bookRepository.findByAuthorContainingIgnoreCase(string);
-
-		if (!bookList.isEmpty()) {
-			List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
-			ModelMapper modelMapper = new ModelMapper();
-
-			for (Book book : bookList) {
-				BookDtoPreview bookDtoPreview = modelMapper.map(book, BookDtoPreview.class);
-				bookDtoPreviewList.add(bookDtoPreview);
+			}for(Book book : bookListAuthor){
+				if(!bookDtoPreviewList.contains(book)){
+					BookDtoPreview bookDtoPreview = modelMapper.map(book, BookDtoPreview.class);
+					bookDtoPreviewList.add(bookDtoPreview);
+				}
 			}
 			return new ResponseEntity<>(bookDtoPreviewList, HttpStatus.OK);
 		} else {

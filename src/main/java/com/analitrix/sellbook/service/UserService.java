@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.analitrix.sellbook.dto.UserDtoDelete;
 import com.analitrix.sellbook.dto.UserDtoId;
+import com.analitrix.sellbook.entity.Book;
 import com.analitrix.sellbook.entity.User;
 import com.analitrix.sellbook.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +51,17 @@ public class UserService {
 	}
 
 	public ResponseEntity<String> deleteUser(UserDtoDelete userDtoDelete) {
-		if (userRepository.findById(userDtoDelete.getId()).isPresent()) {
-			userRepository.deleteById(userDtoDelete.getId());
-			return new ResponseEntity<>("¡Eliminado con exito!", HttpStatus.OK);
-		} else {
+		Optional<User> user = userRepository.findById(userDtoDelete.getId());
+
+		if (user.isPresent()) {
+			User userFound = user.get();
+			if(userDtoDelete.getMail().equals(userFound.getMail())&&userDtoDelete.getPassword().equals(userFound.getPassword())){
+				userRepository.deleteById(userDtoDelete.getId());
+				return new ResponseEntity<>("¡Eliminado con exito!", HttpStatus.OK);
+			}else{
+				return new ResponseEntity<>("Autenticación invalida", HttpStatus.BAD_REQUEST);
+			}
+		}else {
 			return new ResponseEntity<>("No se pudó eliminar", HttpStatus.NOT_FOUND);
 		}
 	}

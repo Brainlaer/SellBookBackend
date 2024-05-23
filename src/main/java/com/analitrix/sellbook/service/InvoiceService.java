@@ -36,7 +36,7 @@ public class InvoiceService {
 		if (user.isPresent()) {
 			Invoice invoice = new Invoice();
 			invoice.setUser(userDtoId.getId());
-
+			System.out.println("usuario encontrado");
 			if (!bookDtoIdList.isEmpty()) {
 				for (BookDtoId bookDtoId : bookDtoIdList) {
 					Optional<Book> book = bookRepository.findById(bookDtoId.getIsxn());
@@ -68,5 +68,4 @@ public class InvoiceService {
 			return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
 		}
 	}
-
 }
