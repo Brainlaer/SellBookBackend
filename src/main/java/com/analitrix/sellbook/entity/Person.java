@@ -15,7 +15,7 @@ import jakarta.persistence.Id;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Person {
 	
 	@Id
 	@Column(unique = true)

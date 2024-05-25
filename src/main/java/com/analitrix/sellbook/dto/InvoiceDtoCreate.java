@@ -5,13 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDtoDelete {
+public class InvoiceDtoCreate {
 
-    private Long id;
-    private String mail;
-    private String password;
+    private Long person;
+    private List<BookDtoId> bookDtoIdList;
 }

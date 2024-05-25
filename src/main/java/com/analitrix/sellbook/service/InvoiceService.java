@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.analitrix.sellbook.dto.BookDtoId;
-import com.analitrix.sellbook.dto.UserDtoId;
+import com.analitrix.sellbook.dto.InvoiceDtoCreate;
+import com.analitrix.sellbook.dto.PersonDtoId;
 import com.analitrix.sellbook.entity.*;
 import com.analitrix.sellbook.repository.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,28 +30,42 @@ public class InvoiceService {
 	private TrackingRepository trackingRepository;
 
 	@Autowired
-	private UserRepository userRepository;
+	private PersonRepository personRepository;
 
-	public ResponseEntity<String> createInvoice(UserDtoId userDtoId, List<BookDtoId> bookDtoIdList) {
-		Optional<User> user = userRepository.findById(userDtoId.getId());
+	@Autowired
+	private InvoicePersonRepository invoicePersonRepository;
 
-		if (user.isPresent()) {
+	public ResponseEntity<String> createInvoice(InvoiceDtoCreate invoiceDtoCreate) {
+		Optional<Person> person = personRepository.findById(invoiceDtoCreate.getPerson());
+
+		if (person.isPresent()) {
+			Person personFound=person.get();
+			InvoicePerson invoicePerson = new InvoicePerson();
+			invoicePerson.setIdPerson(personFound.getId());
+			invoicePerson.setFullName(personFound.getName()+" "+personFound.getSurname());
+			invoicePerson.setPhone(personFound.getPhone());
+			invoicePerson.setMail(personFound.getMail());
+			invoicePerson.setHomeAddress(personFound.getHomeAddress());
+			invoicePersonRepository.save(invoicePerson);
 			Invoice invoice = new Invoice();
-			invoice.setUser(userDtoId.getId());
+			invoice.setInvoicePerson(invoicePerson);
+			invoiceRepository.save(invoice);
 			System.out.println("usuario encontrado");
-			if (!bookDtoIdList.isEmpty()) {
+			if (!invoiceDtoCreate.getBookDtoIdList().isEmpty()) {
+				List<BookDtoId> bookDtoIdList = invoiceDtoCreate.getBookDtoIdList();
 				for (BookDtoId bookDtoId : bookDtoIdList) {
 					Optional<Book> book = bookRepository.findById(bookDtoId.getIsxn());
 					Book bookFound = book.get();
 
 					if (book.isPresent() && bookFound.isAvailable() == true) {
 						InvoiceBook invoiceBook = new InvoiceBook();
+						invoiceBook.setIsxn(bookFound.getIsxn());
 						invoiceBook.setTitle(bookFound.getTitle());
 						invoiceBook.setCost(bookFound.getCost());
 						invoiceBook.setInvoice(invoice);
 						bookFound.sell();
 						bookFound.setAvailability();
-						invoice.setTotalCost(invoice.getTotalCost() + invoiceBook.getCost());
+						invoice.setTotalCost(invoice.getTotalCost()+invoiceBook.getCost());
 						invoiceBookRepository.save(invoiceBook);
 					} else {
 						return new ResponseEntity<>("No se encontró algunos libros", HttpStatus.NOT_FOUND);

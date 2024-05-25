@@ -3,7 +3,8 @@ package com.analitrix.sellbook.controller;
 import java.util.List;
 
 import com.analitrix.sellbook.dto.BookDtoId;
-import com.analitrix.sellbook.dto.UserDtoId;
+import com.analitrix.sellbook.dto.InvoiceDtoCreate;
+import com.analitrix.sellbook.dto.PersonDtoId;
 import com.analitrix.sellbook.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class InvoiceController {
 	private InvoiceService invoiceService;
 
 	@PostMapping("/create")
-	public ResponseEntity<String> createInvoice(@RequestBody UserDtoId userDtoId, List<BookDtoId> bookDtoIdList) {
-		return invoiceService.createInvoice(userDtoId, bookDtoIdList);
+	public ResponseEntity<String> createInvoice(@RequestBody InvoiceDtoCreate invoiceDtoCreate) {
+		return invoiceService.createInvoice(invoiceDtoCreate);
 	}
 }

@@ -14,7 +14,6 @@
 /home/branstivenson/Documents/Workspaces/Spring/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/UserRepository.java
 /home/branstivenson/Documents/Workspaces/Spring/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/InvoiceController.java
 /home/branstivenson/Documents/Workspaces/Spring/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Book.java
-/home/branstivenson/Documents/Workspaces/Spring/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/InvoiceUser.java
 /home/branstivenson/Documents/Workspaces/Spring/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/UserDtoDelete.java
 /home/branstivenson/Documents/Workspaces/Spring/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/BookController.java
 /home/branstivenson/Documents/Workspaces/Spring/SellBookBackend/src/main/java/com/analitrix/sellbook/service/CategoryService.java

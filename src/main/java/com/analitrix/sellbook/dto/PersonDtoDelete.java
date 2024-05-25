@@ -7,9 +7,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserDtoId{
+@NoArgsConstructor
+public class PersonDtoDelete {
 
-	private Long id;
+    private Long id;
+    private String mail;
+    private String password;
 }
