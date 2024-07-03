@@ -9,11 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookDtoPreview{
-
-	private Long isxn;
-	private String title;
-	private String author;
-	private Long cost;
-	private String image;
+public class ResponseHttp {
+    private String status;
+    private String message;
 }

@@ -16,7 +16,7 @@ public class BookDto{
     private Long publicationDate;
     private Long units;
     private String editorial;
-    private double cost;
+    private Long cost;
     private String author;
     private String image;
     private Category category;

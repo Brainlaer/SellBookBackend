@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.analitrix.sellbook.dto.BookDto;
 import com.analitrix.sellbook.dto.BookDtoPreview;
+import com.analitrix.sellbook.dto.ResponseHttp;
 import com.analitrix.sellbook.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,43 +18,58 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
-	@PostMapping("/insert")
-	public ResponseEntity<String> insertBook(@RequestBody BookDto bookDto) {
-		return bookService.insertBook(bookDto);
+	@PostMapping("/admin/insert")
+	public ResponseEntity<ResponseHttp> insertAsAdmin(@RequestBody BookDto bookDto) {
+		return bookService.insertAsAdmin(bookDto);
 	}
 
-	@GetMapping("/{isxnBook}")
-	public ResponseEntity<BookDto> findById(@PathVariable Long isxnBook) {
-		return bookService.findById(isxnBook);
+	@GetMapping("/{id}")
+	public ResponseEntity<BookDto> findById(@PathVariable Long id) {
+		return bookService.findById(id);
 	}
 
-	@GetMapping("/findAll")
-	public ResponseEntity<List<BookDto>> findAll() {
-		return bookService.findAll();
+	@GetMapping("/admin/allBooks")
+	public ResponseEntity<List<BookDto>> findAllByDateDesc() {
+		return bookService.findAllByDateDescAsAdmin();
 	}
 
-	@GetMapping("/recentBooks")
-	public ResponseEntity<List<BookDtoPreview>> findRecentBooks() {
-		return bookService.findRecentBooks();
+	@GetMapping("/recentlyAdded")
+	public ResponseEntity<List<BookDtoPreview>> findAllRecentlyAdded() {
+		return bookService.findAllRecentlyAdded();
 	}
 
-	@GetMapping("/search/{string}")
-	public ResponseEntity<List<BookDtoPreview>> findByAuthorYTitle(@PathVariable String string) {
-		return bookService.findByAuthorYTitle(string);
+	@GetMapping("/findByTitleAndAuthor/{stringSearch}")
+	public ResponseEntity<List<BookDtoPreview>> findAllByTitleAndAuthor(@PathVariable String stringSearch) {
+		return bookService.findAllByTitleAndAuthor(stringSearch);
 	}
 
-	@GetMapping("/category/{idCategory}")
-	public ResponseEntity<List<BookDtoPreview>> findByCategoria(@PathVariable Long idCategory) {
-		return bookService.findByCategory(idCategory);
+	@GetMapping("/admin/findByTitleAndAuthor/{stringSearch}")
+	public ResponseEntity<List<BookDto>> findAllByTitleAndAuthorAsAdmin(@PathVariable String stringSearch) {
+		return bookService.findAllByTitleAndAuthorAsAdmin(stringSearch);
 	}
 
-	@PutMapping("/update")
-	public ResponseEntity<String> updateBook(@RequestBody BookDto bookDto) {
-		return bookService.updateBook(bookDto);
+	@GetMapping("/admin/findAllById/{id}")
+	public ResponseEntity<List<BookDto>> findAllByIdAsAdmin(@PathVariable String stringSearch) {
+		return bookService.findAllByIdAsAdmin(stringSearch);
 	}
 
-	@DeleteMapping("/delete/{isxnBook}")
-		public ResponseEntity<String> deleteById(@PathVariable Long isxnBook) {
-			return bookService.deleteByIsxn(isxnBook);
+	@GetMapping("/findAllBy/category/{categorySearch}/string/{stringSearch}")
+	public ResponseEntity<List<BookDtoPreview>> findAllByCategoryAndTitleAuthor(@PathVariable Long categorySearch, @PathVariable String stringSearch) {
+		return bookService.findAllByCategoryAndTitleAuthor(categorySearch, stringSearch);
+	}
+
+	@GetMapping("/findAllByCategory/{id}")
+	public ResponseEntity<List<BookDtoPreview>> findAllByCategory(@PathVariable Long id) {
+		return bookService.findAllByCategory(id);
+	}
+
+	@PutMapping("/admin/update")
+	public ResponseEntity<ResponseHttp> updateAsAdmin(@RequestBody BookDto bookDto) {
+		return bookService.updateAsAdmin(bookDto);
+	}
+
+	@DeleteMapping("/admin/delete/{id}")
+		public ResponseEntity<ResponseHttp> deleteAsAdmin(@PathVariable Long id) {
+			return bookService.deleteAsAdmin(id);
 		}
 	}
