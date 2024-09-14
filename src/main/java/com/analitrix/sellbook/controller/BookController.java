@@ -18,17 +18,17 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
-	@PostMapping("/admin/insert")
+	@PostMapping("/insert")
 	public ResponseEntity<ResponseHttp> insertAsAdmin(@RequestBody BookDto bookDto) {
 		return bookService.insertAsAdmin(bookDto);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public ResponseEntity<BookDto> findById(@PathVariable Long id) {
 		return bookService.findById(id);
 	}
 
-	@GetMapping("/admin/allBooks")
+	@GetMapping("/allBooks")
 	public ResponseEntity<List<BookDto>> findAllByDateDesc() {
 		return bookService.findAllByDateDescAsAdmin();
 	}
@@ -43,12 +43,12 @@ public class BookController {
 		return bookService.findAllByTitleAndAuthor(stringSearch);
 	}
 
-	@GetMapping("/admin/findByTitleAndAuthor/{stringSearch}")
+	@GetMapping("/findByTitleAndAuthorAsAdmin/{stringSearch}")
 	public ResponseEntity<List<BookDto>> findAllByTitleAndAuthorAsAdmin(@PathVariable String stringSearch) {
 		return bookService.findAllByTitleAndAuthorAsAdmin(stringSearch);
 	}
 
-	@GetMapping("/admin/findAllById/{id}")
+	@GetMapping("/findAllById/{id}")
 	public ResponseEntity<List<BookDto>> findAllByIdAsAdmin(@PathVariable String stringSearch) {
 		return bookService.findAllByIdAsAdmin(stringSearch);
 	}
@@ -63,12 +63,12 @@ public class BookController {
 		return bookService.findAllByCategory(id);
 	}
 
-	@PutMapping("/admin/update")
+	@PutMapping("/update")
 	public ResponseEntity<ResponseHttp> updateAsAdmin(@RequestBody BookDto bookDto) {
 		return bookService.updateAsAdmin(bookDto);
 	}
 
-	@DeleteMapping("/admin/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 		public ResponseEntity<ResponseHttp> deleteAsAdmin(@PathVariable Long id) {
 			return bookService.deleteAsAdmin(id);
 		}
