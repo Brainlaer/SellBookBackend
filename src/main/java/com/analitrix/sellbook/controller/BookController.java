@@ -48,7 +48,7 @@ public class BookController {
 		return bookService.findAllByTitleAndAuthorAsAdmin(stringSearch);
 	}
 
-	@GetMapping("/findAllById/{id}")
+	@GetMapping("/findAllByIdAsAdmin/{stringSearch}")
 	public ResponseEntity<List<BookDto>> findAllByIdAsAdmin(@PathVariable String stringSearch) {
 		return bookService.findAllByIdAsAdmin(stringSearch);
 	}
