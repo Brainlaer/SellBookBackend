@@ -1,9 +1,11 @@
 package com.analitrix.sellbook.controller;
 
 import java.util.List;
+import java.util.Objects;
 
-import com.analitrix.sellbook.dto.BookDto;
+import com.analitrix.sellbook.dto.BookDtoGet;
 import com.analitrix.sellbook.dto.BookDtoPreview;
+import com.analitrix.sellbook.dto.BookDtoPut;
 import com.analitrix.sellbook.dto.ResponseHttp;
 import com.analitrix.sellbook.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,58 +20,58 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
-	@PostMapping("/insert")
-	public ResponseEntity<ResponseHttp> insertAsAdmin(@RequestBody BookDto bookDto) {
-		return bookService.insertAsAdmin(bookDto);
+	@PostMapping("")
+	public ResponseEntity<ResponseHttp> create(@RequestBody BookDtoGet bookDtoGet) {
+		return bookService.create(bookDtoGet);
 	}
 
-	@GetMapping("/id/{id}")
-	public ResponseEntity<BookDto> findById(@PathVariable Long id) {
-		return bookService.findById(id);
+	@GetMapping("/{id}")
+	public ResponseEntity<ResponseHttp> findOneById(@PathVariable Long id) {
+		return bookService.findOneById(id);
 	}
 
-	@GetMapping("/allBooks")
-	public ResponseEntity<List<BookDto>> findAllByDateDesc() {
-		return bookService.findAllByDateDescAsAdmin();
+	@GetMapping("")
+	public ResponseEntity<ResponseHttp> findOrderedByDateDesc() {
+		return bookService.findOrderedByDateDesc();
 	}
 
-	@GetMapping("/recentlyAdded")
-	public ResponseEntity<List<BookDtoPreview>> findAllRecentlyAdded() {
-		return bookService.findAllRecentlyAdded();
+	@GetMapping("/recentlyadded")
+	public ResponseEntity<ResponseHttp> findRecentlyAdded() {
+		return bookService.findRecentlyAdded();
 	}
 
-	@GetMapping("/findByTitleAndAuthor/{stringSearch}")
-	public ResponseEntity<List<BookDtoPreview>> findAllByTitleAndAuthor(@PathVariable String stringSearch) {
-		return bookService.findAllByTitleAndAuthor(stringSearch);
+	@GetMapping("/title&&author/{stringSearch}")
+	public ResponseEntity<ResponseHttp> findAllByTitleAndAuthor(@PathVariable String stringSearch) {
+		return bookService.findByTitleAndAuthor(stringSearch);
 	}
 
-	@GetMapping("/findByTitleAndAuthorAsAdmin/{stringSearch}")
-	public ResponseEntity<List<BookDto>> findAllByTitleAndAuthorAsAdmin(@PathVariable String stringSearch) {
-		return bookService.findAllByTitleAndAuthorAsAdmin(stringSearch);
+	@GetMapping("/title&&authoralldata/{stringSearch}")
+	public ResponseEntity<ResponseHttp> findByTitleAndAuthorAllData(@PathVariable String stringSearch) {
+		return bookService.findByTitleAndAuthorAllData(stringSearch);
 	}
 
-	@GetMapping("/findAllByIdAsAdmin/{stringSearch}")
-	public ResponseEntity<List<BookDto>> findAllByIdAsAdmin(@PathVariable String stringSearch) {
-		return bookService.findAllByIdAsAdmin(stringSearch);
+	@GetMapping("/id/{idSearch}")
+	public ResponseEntity<ResponseHttp> findById(@PathVariable String idSearch) {
+		return bookService.findById(idSearch);
 	}
 
-	@GetMapping("/findAllBy/category/{categorySearch}/string/{stringSearch}")
-	public ResponseEntity<List<BookDtoPreview>> findAllByCategoryAndTitleAuthor(@PathVariable Long categorySearch, @PathVariable String stringSearch) {
-		return bookService.findAllByCategoryAndTitleAuthor(categorySearch, stringSearch);
+	@GetMapping("/category/{categorySearch}")
+	public ResponseEntity<ResponseHttp> findByCategory(@PathVariable Long categorySearch) {
+		return bookService.findByCategory(categorySearch);
 	}
 
-	@GetMapping("/findAllByCategory/{id}")
-	public ResponseEntity<List<BookDtoPreview>> findAllByCategory(@PathVariable Long id) {
-		return bookService.findAllByCategory(id);
+	@GetMapping("/title&&author/{stringSearch}/category/{categorySearch}")
+	public ResponseEntity<ResponseHttp> findByTitleAuthorAndCategory(@PathVariable Long categorySearch, @PathVariable String stringSearch) {
+		return bookService.findByTitleAuthorAndCategory(categorySearch, stringSearch);
 	}
 
-	@PutMapping("/update")
-	public ResponseEntity<ResponseHttp> updateAsAdmin(@RequestBody BookDto bookDto) {
-		return bookService.updateAsAdmin(bookDto);
+	@PatchMapping("/{id}")
+	public ResponseEntity<ResponseHttp> update(@PathVariable Long id, @RequestBody BookDtoPut bookDtoPut) {
+		return bookService.update(id,bookDtoPut);
 	}
 
-	@DeleteMapping("/delete/{id}")
-		public ResponseEntity<ResponseHttp> deleteAsAdmin(@PathVariable Long id) {
-			return bookService.deleteAsAdmin(id);
+	@DeleteMapping("/{id}")
+		public ResponseEntity<ResponseHttp> delete(@PathVariable Long id) {
+			return bookService.delete(id);
 		}
 	}

@@ -11,5 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ResponseHttp {
     private String status;
-    private String message;
+    private Object response;
 }

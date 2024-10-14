@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookDto{
+public class BookDtoGet {
     private Long isxn;
     private String title;
     private Long publicationDate;

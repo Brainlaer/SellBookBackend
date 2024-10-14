@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.analitrix.sellbook.dto.BookDto;
+import com.analitrix.sellbook.dto.BookDtoGet;
 import com.analitrix.sellbook.dto.BookDtoPreview;
+import com.analitrix.sellbook.dto.BookDtoPut;
 import com.analitrix.sellbook.dto.ResponseHttp;
 import com.analitrix.sellbook.entity.Book;
+import com.analitrix.sellbook.entity.Category;
 import com.analitrix.sellbook.repository.BookRepository;
 import com.analitrix.sellbook.repository.CategoryRepository;
 import org.modelmapper.ModelMapper;
@@ -27,43 +29,41 @@ public class BookService {
 
 	ModelMapper modelMapper = new ModelMapper();
 
-	public ResponseEntity<ResponseHttp> insertAsAdmin(BookDto bookDto) {
-		Optional<Book> optionalBook = bookRepository.findById(bookDto.getIsxn());
-		if (optionalBook.isEmpty()) {
-			Book book = modelMapper.map(bookDto, Book.class);
+	public ResponseEntity<ResponseHttp> create(BookDtoGet bookDtoGet) {
+		if (!bookRepository.existsById(bookDtoGet.getIsxn())) {
+			Book book = modelMapper.map(bookDtoGet, Book.class);
 			bookRepository.save(book);
-			return new ResponseEntity<>(new ResponseHttp("OK","Libro: "+bookDto.getTitle()+", Guardado correctamente."), HttpStatus.CREATED);
+			return new ResponseEntity<>(new ResponseHttp("CREATED","Libro: "+ bookDtoGet.getTitle()+", Guardado correctamente."), HttpStatus.CREATED);
 		}else{
-			return new ResponseEntity<>(new ResponseHttp("ERROR","El libro ya existe."), HttpStatus.CONFLICT);
+			return new ResponseEntity<>(new ResponseHttp("BAD_REQUEST","El libro con el id: "+bookDtoGet.getIsxn()+", ya existe."), HttpStatus.BAD_REQUEST);
 		}
 	}
 
-	public ResponseEntity<BookDto> findById(Long id) {
+	public ResponseEntity<ResponseHttp> findOneById(Long id) {
 		Optional<Book> optionalBook = bookRepository.findById(id);
 		if (optionalBook.isPresent()) {
-			Book book=optionalBook.get();
-			BookDto bookDto = modelMapper.map(book, BookDto.class);
-			return new ResponseEntity<>(bookDto, HttpStatus.OK);
+			BookDtoGet bookDtoGet = modelMapper.map(optionalBook.get(), BookDtoGet.class);
+			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGet), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No existe libro con el id: "+id+"."),HttpStatus.NOT_FOUND);
 		}
 	}
 
-	public ResponseEntity<List<BookDto>> findAllByDateDescAsAdmin() {
+	public ResponseEntity<ResponseHttp> findOrderedByDateDesc() {
 		List<Book> bookList = bookRepository.findAllByOrderByModificationDateDesc();
 		if (!bookList.isEmpty()) {
-			List<BookDto> bookDtoList = new ArrayList<>();
+			List<BookDtoGet> bookDtoGetList = new ArrayList<>();
 			for (Book book:bookList){
-				BookDto bookDto = modelMapper.map(book, BookDto.class);
-				bookDtoList.add(bookDto);
+				BookDtoGet bookDtoGet = modelMapper.map(book, BookDtoGet.class);
+				bookDtoGetList.add(bookDtoGet);
 			}
-			return new ResponseEntity<>(bookDtoList, HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGetList), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No se encontraron libros."),HttpStatus.NOT_FOUND);
 		}
 	}
 
-	public ResponseEntity<List<BookDtoPreview>> findAllRecentlyAdded() {
+	public ResponseEntity<ResponseHttp> findRecentlyAdded() {
 		List<Book> bookList = bookRepository.findAllByOrderByModificationDateDesc();
 		if (!bookList.isEmpty()) {
 			List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
@@ -76,13 +76,13 @@ public class BookService {
 					break;
 				}
 			}
-			return new ResponseEntity<>(bookDtoPreviewList, HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoPreviewList), HttpStatus.OK);
 		}else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No se encontraron libros."),HttpStatus.NOT_FOUND);
 		}
 	}
 
-	public ResponseEntity<List<BookDtoPreview>> findAllByTitleAndAuthor(String stringSearch) {
+	public ResponseEntity<ResponseHttp> findByTitleAndAuthor(String stringSearch) {
 		List<Book> bookListTitleAuthor = bookRepository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(stringSearch, stringSearch);
 		List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
 		if (!bookListTitleAuthor.isEmpty()) {
@@ -90,58 +90,44 @@ public class BookService {
 				BookDtoPreview bookDtoPreview = modelMapper.map(book, BookDtoPreview.class);
 				bookDtoPreviewList.add(bookDtoPreview);
 			}
-			return new ResponseEntity<>(bookDtoPreviewList, HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoPreviewList), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(bookDtoPreviewList, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No hay libros para la busqueda: "+stringSearch+"."),HttpStatus.NOT_FOUND);
 		}
 	}
 
-	public ResponseEntity<List<BookDto>> findAllByTitleAndAuthorAsAdmin(String stringSearch) {
+	public ResponseEntity<ResponseHttp> findByTitleAndAuthorAllData(String stringSearch) {
 		List<Book> bookListTitleAuthor = bookRepository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(stringSearch, stringSearch);
-		List<BookDto> bookDtoList = new ArrayList<>();
+		List<BookDtoGet> bookDtoGetList = new ArrayList<>();
 		if (!bookListTitleAuthor.isEmpty()) {
 			for (Book book : bookListTitleAuthor) {
-				BookDto bookDto = modelMapper.map(book, BookDto.class);
-				bookDtoList.add(bookDto);
+				BookDtoGet bookDtoGet = modelMapper.map(book, BookDtoGet.class);
+				bookDtoGetList.add(bookDtoGet);
 			}
-			return new ResponseEntity<>(bookDtoList, HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGetList), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(bookDtoList, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No hay libros para la busqueda: "+stringSearch+"."),HttpStatus.NOT_FOUND);
 		}
 	}
 
-	public ResponseEntity<List<BookDto>> findAllByIdAsAdmin(String stringSearch){
+	public ResponseEntity<ResponseHttp> findById(String idSearch){
 		List<Book> bookList = bookRepository.findAll();
-		List<BookDto> bookDtoList = new ArrayList<>();
+		List<BookDtoGet> bookDtoGetList = new ArrayList<>();
 		for (Book book:bookList){
 			String idBook=book.getIsxn().toString();
-			if(idBook.contains(stringSearch)){
-				BookDto bookDto = modelMapper.map(book, BookDto.class);
-				bookDtoList.add(bookDto);
+			if(idBook.contains(idSearch)){
+				BookDtoGet bookDtoGet = modelMapper.map(book, BookDtoGet.class);
+				bookDtoGetList.add(bookDtoGet);
 			}
 		}
-		if(!bookDtoList.isEmpty()){
-			return new ResponseEntity<>(bookDtoList, HttpStatus.OK);
+		if(!bookDtoGetList.isEmpty()){
+			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGetList), HttpStatus.OK);
 		}else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No hay libros para la busqueda: "+idSearch+"."),HttpStatus.NOT_FOUND);
 		}
 	}
 
-	public ResponseEntity<List<BookDtoPreview>> findAllByCategoryAndTitleAuthor(Long categorySearch, String stringSearch){
-		List<Book> bookListCategoryAndTitleOrAuthor = bookRepository.findByCategoryAndTitleAuthor(categorySearch, stringSearch);
-		List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
-		if (!bookListCategoryAndTitleOrAuthor.isEmpty()) {
-			for (Book book : bookListCategoryAndTitleOrAuthor) {
-				BookDtoPreview bookDtoPreview = modelMapper.map(book, BookDtoPreview.class);
-				bookDtoPreviewList.add(bookDtoPreview);
-			}
-			return new ResponseEntity<>(bookDtoPreviewList, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(bookDtoPreviewList, HttpStatus.NO_CONTENT);
-		}
-	}
-
-	public ResponseEntity<List<BookDtoPreview>> findAllByCategory(Long categorySearch) {
+	public ResponseEntity<ResponseHttp> findByCategory(Long categorySearch) {
 		List<Book> bookList = bookRepository.findAllByCategoryId(categorySearch);
 		if (!bookList.isEmpty()) {
 			List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
@@ -149,47 +135,69 @@ public class BookService {
 				BookDtoPreview bookDtoPreview = modelMapper.map(book, BookDtoPreview.class);
 				bookDtoPreviewList.add(bookDtoPreview);
 			}
-			return new ResponseEntity<>(bookDtoPreviewList ,HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoPreviewList) ,HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No se encontraron libros en esta categoria."),HttpStatus.NOT_FOUND);
 		}
 	}
 
-	public ResponseEntity<ResponseHttp> updateAsAdmin(BookDto bookDto) {
-		Optional<Book> optionalBook = bookRepository.findById(bookDto.getIsxn());
+	public ResponseEntity<ResponseHttp> findByTitleAuthorAndCategory(Long categorySearch, String stringSearch){
+		List<Book> bookListCategoryAndTitleOrAuthor = bookRepository.findByCategoryAndTitleAuthor(categorySearch, stringSearch);
+		List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
+		if (!bookListCategoryAndTitleOrAuthor.isEmpty()) {
+			for (Book book : bookListCategoryAndTitleOrAuthor) {
+				BookDtoPreview bookDtoPreview = modelMapper.map(book, BookDtoPreview.class);
+				bookDtoPreviewList.add(bookDtoPreview);
+			}
+			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoPreviewList), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No hay libros para la busqueda: "+stringSearch+", en esta categoria."),HttpStatus.NOT_FOUND);
+		}
+	}
+
+
+
+	public ResponseEntity<ResponseHttp> update(Long id,BookDtoPut bookDtoPut) {
+		Optional<Book> optionalBook = bookRepository.findById(id);
 		if (optionalBook.isPresent()) {
 			Book book = optionalBook.get();
-			if(!bookDto.getTitle().isEmpty()){
-				book.setTitle(bookDto.getTitle());
-			} if(!bookDto.getAuthor().isEmpty()){
-				book.setAuthor(bookDto.getAuthor());
-			} if(!bookDto.getEditorial().isEmpty()){
-				book.setEditorial(bookDto.getEditorial());
-			} if(bookDto.getPublicationDate()!=null){
-				book.setPublicationDate(bookDto.getPublicationDate());
-			} if(bookDto.getUnits()!=null){
-				book.setUnits(bookDto.getUnits());
-			} if(bookDto.getCost()!=null){
-				book.setCost(bookDto.getCost());
-			} if(!bookDto.getImage().isEmpty()){
-				book.setImage(bookDto.getImage());
-			} if(bookDto.getCategory().getId()!=null){
-				book.setCategory(bookDto.getCategory());
+			BookDtoPut bookDto = modelMapper.map(book, BookDtoPut.class);
+			if(bookDtoPut.toString().equals(bookDto.toString())){
+				return new ResponseEntity<>(new ResponseHttp("OK","No hay cambios para el libro: "+bookDtoPut.getTitle()+"."),HttpStatus.OK);
 			}
+			if(bookDtoPut.getTitle()!=null){
+				book.setTitle(bookDtoPut.getTitle());
+			} if(bookDtoPut.getAuthor()!=null){
+				book.setAuthor(bookDtoPut.getAuthor());
+			} if(bookDtoPut.getEditorial()!=null){
+				book.setEditorial(bookDtoPut.getEditorial());
+			} if(bookDtoPut.getPublicationDate()!=null){
+				book.setPublicationDate(bookDtoPut.getPublicationDate());
+			} if(bookDtoPut.getUnits()!=null){
+				book.setUnits(bookDtoPut.getUnits());
+			} if(bookDtoPut.getCost()!=null){
+				book.setCost(bookDtoPut.getCost());
+			} if(bookDtoPut.getImage()!=null){
+				book.setImage(bookDtoPut.getImage());
+			} if(bookDtoPut.getCategory()!=null){
+				book.setCategory(bookDtoPut.getCategory());
+			}
+			book.setAvailability();
+			book.modify();
 			bookRepository.save(book);
-			return new ResponseEntity<>(new ResponseHttp("OK","Libro actualizado con exito."), HttpStatus.CREATED) ;
+			return new ResponseEntity<>(new ResponseHttp("OK","Libro: "+bookDtoPut.getTitle()+", actualizado con exito."), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseHttp("ERROR","Parece que el libro no existe."), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","Libro con el id: "+id+", no existe."), HttpStatus.NOT_FOUND);
 		}
 	}
 
-	public ResponseEntity<ResponseHttp> deleteAsAdmin(Long id) {
+	public ResponseEntity<ResponseHttp> delete(Long id) {
 		Optional<Book> book = bookRepository.findById(id);
 		if (book.isPresent()) {
 			bookRepository.deleteById(id);
-			return new ResponseEntity<>(new ResponseHttp("OK","Eliminado con exito"), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseHttp("OK","libro: "+book.get().getTitle()+", eliminado con exito"), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseHttp("ERROR", "Parece que el libro no existe."), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","Libro con el id: "+id+", no existe."), HttpStatus.NOT_FOUND);
 		}
 	}
 }
