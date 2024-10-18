@@ -163,7 +163,7 @@ public class BookService {
 			Book book = optionalBook.get();
 			BookDtoPut bookDto = modelMapper.map(book, BookDtoPut.class);
 			if(bookDtoPut.toString().equals(bookDto.toString())){
-				return new ResponseEntity<>(new ResponseHttp("OK","No hay cambios para el libro: "+bookDtoPut.getTitle()+"."),HttpStatus.OK);
+				return new ResponseEntity<>(new ResponseHttp("NOT_MODIFIED","No hay cambios para el libro: "+bookDtoPut.getTitle()+"."),HttpStatus.OK);
 			}
 			if(bookDtoPut.getTitle()!=null){
 				book.setTitle(bookDtoPut.getTitle());
