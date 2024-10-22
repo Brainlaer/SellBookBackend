@@ -45,16 +45,6 @@ public class BookController {
 		return bookService.findByTitleAndAuthor(stringSearch);
 	}
 
-	@GetMapping("/title&&authoralldata/{stringSearch}")
-	public ResponseEntity<ResponseHttp> findByTitleAndAuthorAllData(@PathVariable String stringSearch) {
-		return bookService.findByTitleAndAuthorAllData(stringSearch);
-	}
-
-	@GetMapping("/id/{idSearch}")
-	public ResponseEntity<ResponseHttp> findById(@PathVariable String idSearch) {
-		return bookService.findById(idSearch);
-	}
-
 	@GetMapping("/category/{categorySearch}")
 	public ResponseEntity<ResponseHttp> findByCategory(@PathVariable Long categorySearch) {
 		return bookService.findByCategory(categorySearch);
