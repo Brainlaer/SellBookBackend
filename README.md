@@ -3,6 +3,6 @@
   actualizar o eliminar registros de sus libros, y cambiar el estado de las guías generadas a clientes los cuales se almacenan en una base de datos SQL. Mientras que los 
   clientes pueden visualizar los libros que están a la venta, añadirlos al carrito de compras para luego comprarlos con pago a contra-entrega, generando automáticamente su 
   factura y su guía</p>
-<h2>Frontend</h2>
-<p>SellBook: https://github.com/Branstivenson/SellBookFrontend</p>
-<p>SellBook Admin: https://github.com/Branstivenson/SellBookAdminFrontend</p>
+<h2>More for SellBook</h2>
+<p>Frontend: https://github.com/Branstivenson/SellBookFrontend</p>
+<p>Frontend para admin: https://github.com/Branstivenson/SellBookAdminFrontend</p>
