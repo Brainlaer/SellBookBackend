@@ -30,13 +30,10 @@ public class SecurityConfig {
                                 .disable())
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers( HttpMethod.POST).permitAll()
-                                .requestMatchers( HttpMethod.PATCH).permitAll()
-                                .requestMatchers( HttpMethod.DELETE).permitAll()
-
+                                .requestMatchers("/sellbook/auth/**").permitAll()
+                                .requestMatchers("/sellbook/checktoken").authenticated()
                                 .requestMatchers( HttpMethod.GET).permitAll()
                                 .requestMatchers( HttpMethod.OPTIONS).permitAll()
-                                .requestMatchers("/auth/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .authenticationProvider(authProvider)

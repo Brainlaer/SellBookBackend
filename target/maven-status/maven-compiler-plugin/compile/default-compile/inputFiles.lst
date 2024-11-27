@@ -5,6 +5,7 @@
 /home/brayanv/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/BookDtoId.java
 /home/brayanv/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/InvoiceDtoCreate.java
 /home/brayanv/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Person.java
+/home/brayanv/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/BookRequestDto.java
 /home/brayanv/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/jwt/JwtService.java
 /home/brayanv/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/BookRepository.java
 /home/brayanv/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/BookDtoPreview.java

@@ -24,7 +24,6 @@ public class BookController {
 	public ResponseEntity<ResponseHttp> create(@RequestBody BookDtoGet bookDtoGet) {
 		return bookService.create(bookDtoGet);
 	}
-
 	@GetMapping("/{id}")
 	public ResponseEntity<ResponseHttp> findOneById(@PathVariable Long id) {
 		return bookService.findOneById(id);

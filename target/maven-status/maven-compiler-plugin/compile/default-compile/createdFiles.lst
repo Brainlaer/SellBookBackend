@@ -2,6 +2,7 @@ com/analitrix/sellbook/controller/CategoryController.class
 com/analitrix/sellbook/dto/PersonDtoDelete.class
 com/analitrix/sellbook/repository/TrackingRepository.class
 com/analitrix/sellbook/entity/InvoicePerson.class
+com/analitrix/sellbook/dto/BookRequestDto.class
 com/analitrix/sellbook/entity/InvoiceBook.class
 com/analitrix/sellbook/entity/Book.class
 com/analitrix/sellbook/repository/BookRepository.class
