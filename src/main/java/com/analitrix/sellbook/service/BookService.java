@@ -50,7 +50,7 @@ public class BookService {
 	}
 
 	public ResponseEntity<ResponseHttp> findOrderedByDateDesc() {
-		List<Book> bookList = bookRepository.findAllByOrderByModificationDateDesc();
+		List<Book> bookList = bookRepository.findTop10ByOrderByModificationDateDesc();
 		if (!bookList.isEmpty()) {
 			List<BookDtoGet> bookDtoGetList = new ArrayList<>();
 			for (Book book:bookList){
@@ -64,20 +64,30 @@ public class BookService {
 	}
 
 	public ResponseEntity<ResponseHttp> findRecentlyAdded() {
-		List<Book> bookList = bookRepository.findAllByOrderByModificationDateDesc();
+		List<Book> bookList = bookRepository.findTop10ByOrderByModificationDateDesc();
 		if (!bookList.isEmpty()) {
-			List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
-			int maxBooks = 10;
-			for (Book book : bookList) {
-				BookDtoPreview bookDtoPreview = modelMapper.map(book, BookDtoPreview.class);
-				bookDtoPreviewList.add(bookDtoPreview);
-				maxBooks--;
-				if (maxBooks == 0) {
-					break;
-				}
+			List<BookDtoGet> bookDtoGetList = new ArrayList<>();
+			for (Book book:bookList){
+				BookDtoGet bookDtoGet = modelMapper.map(book, BookDtoGet.class);
+				bookDtoGetList.add(bookDtoGet);
 			}
-			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoPreviewList), HttpStatus.OK);
-		}else {
+			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGetList), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No se encontraron libros."),HttpStatus.NOT_FOUND);
+		}
+	}
+
+	public ResponseEntity<ResponseHttp> findTopByCategory(Long id) {
+		Optional<Category> category=categoryRepository.findById(id);
+		List<Book> bookList = bookRepository.findTop10ByCategory(category.get());
+		if (!bookList.isEmpty()) {
+			List<BookDtoGet> bookDtoGetList = new ArrayList<>();
+			for (Book book:bookList){
+				BookDtoGet bookDtoGet = modelMapper.map(book, BookDtoGet.class);
+				bookDtoGetList.add(bookDtoGet);
+			}
+			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGetList), HttpStatus.OK);
+		} else {
 			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No se encontraron libros."),HttpStatus.NOT_FOUND);
 		}
 	}

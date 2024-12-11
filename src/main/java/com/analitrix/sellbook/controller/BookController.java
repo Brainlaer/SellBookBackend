@@ -7,6 +7,7 @@ import com.analitrix.sellbook.dto.BookDtoGet;
 import com.analitrix.sellbook.dto.BookDtoPreview;
 import com.analitrix.sellbook.dto.BookDtoPut;
 import com.analitrix.sellbook.dto.ResponseHttp;
+import com.analitrix.sellbook.entity.Category;
 import com.analitrix.sellbook.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,11 @@ public class BookController {
 	@GetMapping("/recentlyadded")
 	public ResponseEntity<ResponseHttp> findRecentlyAdded() {
 		return bookService.findRecentlyAdded();
+	}
+
+	@GetMapping("/topcategory/{id}")
+	public ResponseEntity<ResponseHttp> findTopByCategory(@PathVariable Long id) {
+		return bookService.findTopByCategory(id);
 	}
 
 	@GetMapping("/title&&author/{stringSearch}")
