@@ -15,10 +15,15 @@ public class PersonController {
 	
 	@Autowired
 	private PersonService personService;
-	
-	@GetMapping("/findById")
-	public ResponseEntity<Person> findById(@RequestBody PersonDtoId userDtoId){
-		return personService.findById(userDtoId);
+
+//	@GetMapping("/{id}")
+//	public ResponseEntity<Person> findById(@PathVariable Long id){
+//		return personService.findById(id);
+//	}
+
+	@GetMapping("/{mail}")
+	public ResponseEntity<Person> findByMail(@PathVariable String mail){
+		return personService.findByMail(mail);
 	}
 	
 	@PostMapping("/insertUser")

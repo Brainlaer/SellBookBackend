@@ -32,7 +32,7 @@ public class SecurityConfig {
                         authRequest
                                 .requestMatchers("/sellbook/auth/**").permitAll()
                                 .requestMatchers("/sellbook/checktoken").authenticated()
-                                .requestMatchers( HttpMethod.GET).permitAll()
+                                .requestMatchers(HttpMethod.GET,"/sellbook/book/**","/sellbook/category/**").permitAll()
                                 .requestMatchers( HttpMethod.OPTIONS).permitAll()
                                 .anyRequest().authenticated()
                 )

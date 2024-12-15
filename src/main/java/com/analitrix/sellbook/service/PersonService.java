@@ -17,12 +17,22 @@ public class PersonService {
 	@Autowired
 	private PersonRepository personRepository;
 
-	public ResponseEntity<Person> findById(PersonDtoId personDtoId) {
-		Optional<Person> person = personRepository.findById(personDtoId.getId());
+	public ResponseEntity<Person> findById(Long id) {
+		Optional<Person> person = personRepository.findById(id);
 
 		if (person.isPresent()) {
 			Person personFound = person.get();
 			return new ResponseEntity<>(personFound, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	public ResponseEntity<Person> findByMail(String mail) {
+		Person person = personRepository.findByMail(mail);
+
+		if (person!=null) {
+			return new ResponseEntity<>(person, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
