@@ -4,12 +4,14 @@ import com.analitrix.sellbook.dto.PersonDtoDelete;
 import com.analitrix.sellbook.dto.PersonDtoId;
 import com.analitrix.sellbook.entity.Person;
 import com.analitrix.sellbook.service.PersonService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name="User")
 @RestController
-@RequestMapping ("/sellbook/user")
+@RequestMapping ("/api/v1/user")
 @CrossOrigin(origins = "*")
 public class PersonController {
 	

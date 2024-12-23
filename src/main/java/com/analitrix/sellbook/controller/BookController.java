@@ -7,14 +7,17 @@ import com.analitrix.sellbook.dto.BookDtoGet;
 import com.analitrix.sellbook.dto.BookDtoPreview;
 import com.analitrix.sellbook.dto.BookDtoPut;
 import com.analitrix.sellbook.dto.ResponseHttp;
+import com.analitrix.sellbook.entity.Book;
 import com.analitrix.sellbook.entity.Category;
+import com.analitrix.sellbook.filters.BookPaginationDto;
 import com.analitrix.sellbook.service.BookService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@Tag(name="Book")
 @RestController
-@RequestMapping("/sellbook/book")
+@RequestMapping("/api/v1/book")
 @CrossOrigin(origins = "*")
 public class BookController {
 
@@ -25,13 +28,14 @@ public class BookController {
 	public ResponseEntity<ResponseHttp> create(@RequestBody BookDtoGet bookDtoGet) {
 		return bookService.create(bookDtoGet);
 	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<ResponseHttp> findOneById(@PathVariable Long id) {
 		return bookService.findOneById(id);
 	}
 
 	@GetMapping("")
-	public ResponseEntity<ResponseHttp> findOrderedByDateDesc() {
+	public ResponseEntity<ResponseHttp> findOrderedByDateDesc(BookPaginationDto filters) {
 		return bookService.findOrderedByDateDesc();
 	}
 
