@@ -12,6 +12,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.UUID;
+
 @Entity
 @Table(name="invoice_books")
 @Getter
@@ -21,13 +24,13 @@ import lombok.Setter;
 public class InvoiceBook {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String id= UUID.randomUUID().toString();
 	private Long isxn;
 	private String title;
 	@Column(nullable = true)
 	private double cost;
+
 	@ManyToOne
-	@JoinColumn(name = "id_invoice")
+	@JoinColumn(name = "invoice_id")
 	private Invoice invoice;
 }

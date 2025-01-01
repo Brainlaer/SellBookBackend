@@ -1,5 +1,6 @@
 package com.analitrix.sellbook.dto;
 
+import com.analitrix.sellbook.dto.book.BookDtoId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 public class InvoiceDtoCreate {
 
-    private Long person;
+    private String person;
     private List<BookDtoId> bookDtoIdList;
 }

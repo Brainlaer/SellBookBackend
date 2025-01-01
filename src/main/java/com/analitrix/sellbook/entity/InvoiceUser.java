@@ -5,21 +5,26 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.UUID;
+
 @Entity
-@Table(name = "invoice_people")
+@Table(name = "invoice_user")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class InvoicePerson {
+public class InvoiceUser {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
-    @Column(name="id_person")
-    private Long idPerson;
-    @Column(name="full_name")
+    private String id= UUID.randomUUID().toString();
+    @Column(name="user_id", unique = true)
+    private String user;
+    private Long documentNumber;
+    @Column(name="fullname")
     private String fullName;
+    @Column(unique = true)
     private Long phone;
+    @Column(unique = true)
     private String mail;
     @Column(name = "home_address")
     private String homeAddress;

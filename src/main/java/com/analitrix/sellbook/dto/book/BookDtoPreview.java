@@ -1,4 +1,4 @@
-package com.analitrix.sellbook.dto;
+package com.analitrix.sellbook.dto.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

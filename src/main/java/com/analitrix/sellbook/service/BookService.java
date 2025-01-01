@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.analitrix.sellbook.dto.BookDtoGet;
-import com.analitrix.sellbook.dto.BookDtoPreview;
-import com.analitrix.sellbook.dto.BookDtoPut;
+import com.analitrix.sellbook.dto.book.BookDtoGet;
+import com.analitrix.sellbook.dto.book.BookDtoPost;
+import com.analitrix.sellbook.dto.book.BookDtoPreview;
+import com.analitrix.sellbook.dto.book.BookDtoPut;
 import com.analitrix.sellbook.dto.ResponseHttp;
 import com.analitrix.sellbook.entity.Book;
 import com.analitrix.sellbook.entity.Category;
@@ -29,17 +30,17 @@ public class BookService {
 
 	ModelMapper modelMapper = new ModelMapper();
 
-	public ResponseEntity<ResponseHttp> create(BookDtoGet bookDtoGet) {
-		if (!bookRepository.existsById(bookDtoGet.getIsxn())) {
-			Book book = modelMapper.map(bookDtoGet, Book.class);
+	public ResponseEntity<ResponseHttp> create(BookDtoPost bookDtoPost) {
+		if (!bookRepository.existByIsxn(bookDtoPost.getIsxn())) {
+			Book book = modelMapper.map(bookDtoPost, Book.class);
 			bookRepository.save(book);
-			return new ResponseEntity<>(new ResponseHttp("CREATED","Libro: "+ bookDtoGet.getTitle()+", Guardado correctamente."), HttpStatus.CREATED);
+			return new ResponseEntity<>(new ResponseHttp("CREATED","Libro: "+ bookDtoPost.getTitle()+", Guardado correctamente."), HttpStatus.CREATED);
 		}else{
-			return new ResponseEntity<>(new ResponseHttp("BAD_REQUEST","El libro con el id: "+bookDtoGet.getIsxn()+", ya existe."), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseHttp("BAD_REQUEST","El libro con el id: "+bookDtoPost.getIsxn()+", ya existe."), HttpStatus.BAD_REQUEST);
 		}
 	}
 
-	public ResponseEntity<ResponseHttp> findOneById(Long id) {
+	public ResponseEntity<ResponseHttp> findOneById(String id) {
 		Optional<Book> optionalBook = bookRepository.findById(id);
 		if (optionalBook.isPresent()) {
 			BookDtoGet bookDtoGet = modelMapper.map(optionalBook.get(), BookDtoGet.class);
@@ -77,7 +78,7 @@ public class BookService {
 		}
 	}
 
-	public ResponseEntity<ResponseHttp> findTopByCategory(Long id) {
+	public ResponseEntity<ResponseHttp> findTopByCategory(String id) {
 		Optional<Category> category=categoryRepository.findById(id);
 		List<Book> bookList = bookRepository.findTop10ByCategory(category.get());
 		if (!bookList.isEmpty()) {
@@ -137,7 +138,7 @@ public class BookService {
 		}
 	}
 
-	public ResponseEntity<ResponseHttp> findByCategory(Long categorySearch) {
+	public ResponseEntity<ResponseHttp> findByCategory(String categorySearch) {
 		List<Book> bookList = bookRepository.findAllByCategoryId(categorySearch);
 		if (!bookList.isEmpty()) {
 			List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
@@ -167,7 +168,7 @@ public class BookService {
 
 
 
-	public ResponseEntity<ResponseHttp> update(Long id,BookDtoPut bookDtoPut) {
+	public ResponseEntity<ResponseHttp> update(String id,BookDtoPut bookDtoPut) {
 		Optional<Book> optionalBook = bookRepository.findById(id);
 		if (optionalBook.isPresent()) {
 			Book book = optionalBook.get();
@@ -175,7 +176,9 @@ public class BookService {
 			if(bookDtoPut.toString().equals(bookDto.toString())){
 				return new ResponseEntity<>(new ResponseHttp("NOT_MODIFIED","No hay cambios para el libro: "+bookDtoPut.getTitle()+"."),HttpStatus.OK);
 			}
-			if(bookDtoPut.getTitle()!=null){
+			if(bookDtoPut.getIsxn()!=null){
+				book.setIsxn(bookDtoPut.getIsxn());
+			}if(bookDtoPut.getTitle()!=null){
 				book.setTitle(bookDtoPut.getTitle());
 			} if(bookDtoPut.getAuthor()!=null){
 				book.setAuthor(bookDtoPut.getAuthor());
@@ -201,7 +204,7 @@ public class BookService {
 		}
 	}
 
-	public ResponseEntity<ResponseHttp> delete(Long id) {
+	public ResponseEntity<ResponseHttp> delete(String id) {
 		Optional<Book> book = bookRepository.findById(id);
 		if (book.isPresent()) {
 			bookRepository.deleteById(id);

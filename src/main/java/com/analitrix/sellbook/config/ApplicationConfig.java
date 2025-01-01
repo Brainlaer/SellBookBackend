@@ -1,6 +1,6 @@
 package com.analitrix.sellbook.config;
 
-import com.analitrix.sellbook.repository.PersonRepository;
+import com.analitrix.sellbook.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ApplicationConfig {
 
     @Autowired
-    private PersonRepository personRepository;
+    private UserRepository userRepository;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
@@ -37,7 +37,7 @@ public class ApplicationConfig {
     }
     @Bean
     public UserDetailsService userDetailService() {
-        return mail -> personRepository.findByMail(mail);
+        return mail -> userRepository.findByMail(mail);
     }
 
 

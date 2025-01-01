@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "invoices")
@@ -17,16 +18,16 @@ import java.util.Date;
 public class Invoice {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id= UUID.randomUUID().toString();
     @Column(name = "expedition_date")
     private Date expeditionDate;
     @Column(name = "total_cost")
     private double totalCost;
     private String tracking;
+
     @OneToOne
-    @JoinColumn(name = "id_invoice_person")
-    private InvoicePerson invoicePerson;
+    @JoinColumn(name = "invoice_user_id")
+    private InvoiceUser invoiceUser;
 
 
     @PrePersist

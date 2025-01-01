@@ -3,12 +3,10 @@ package com.analitrix.sellbook.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.analitrix.sellbook.dto.BookDtoId;
+import com.analitrix.sellbook.dto.book.BookDtoId;
 import com.analitrix.sellbook.dto.InvoiceDtoCreate;
-import com.analitrix.sellbook.dto.PersonDtoId;
 import com.analitrix.sellbook.entity.*;
 import com.analitrix.sellbook.repository.*;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,31 +28,31 @@ public class InvoiceService {
 	private TrackingRepository trackingRepository;
 
 	@Autowired
-	private PersonRepository personRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-	private InvoicePersonRepository invoicePersonRepository;
+	private InvoiceUserRepository invoiceUserRepository;
 
 	public ResponseEntity<String> createInvoice(InvoiceDtoCreate invoiceDtoCreate) {
-		Optional<Person> person = personRepository.findById(invoiceDtoCreate.getPerson());
+		Optional<User> person = userRepository.findById(invoiceDtoCreate.getPerson());
 
 		if (person.isPresent()) {
-			Person personFound=person.get();
-			InvoicePerson invoicePerson = new InvoicePerson();
-			invoicePerson.setIdPerson(personFound.getId());
-			invoicePerson.setFullName(personFound.getName()+" "+personFound.getSurname());
-			invoicePerson.setPhone(personFound.getPhone());
-			invoicePerson.setMail(personFound.getMail());
-			invoicePerson.setHomeAddress(personFound.getHomeAddress());
-			invoicePersonRepository.save(invoicePerson);
+			User userFound =person.get();
+			InvoiceUser invoiceUser = new InvoiceUser();
+			invoiceUser.setDocumentNumber(userFound.getDocumentNumber());
+			invoiceUser.setFullName(userFound.getName()+" "+ userFound.getSurname());
+			invoiceUser.setPhone(userFound.getPhone());
+			invoiceUser.setMail(userFound.getMail());
+			invoiceUser.setHomeAddress(userFound.getHomeAddress());
+			invoiceUserRepository.save(invoiceUser);
 			Invoice invoice = new Invoice();
-			invoice.setInvoicePerson(invoicePerson);
+			invoice.setInvoiceUser(invoiceUser);
 			invoiceRepository.save(invoice);
 			System.out.println("usuario encontrado");
 			if (!invoiceDtoCreate.getBookDtoIdList().isEmpty()) {
 				List<BookDtoId> bookDtoIdList = invoiceDtoCreate.getBookDtoIdList();
 				for (BookDtoId bookDtoId : bookDtoIdList) {
-					Optional<Book> book = bookRepository.findById(bookDtoId.getIsxn());
+					Optional<Book> book = bookRepository.findById(bookDtoId.getId());
 					Book bookFound = book.get();
 
 					if (book.isPresent() && bookFound.isAvailable() == true) {

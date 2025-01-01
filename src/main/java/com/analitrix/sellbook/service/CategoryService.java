@@ -21,7 +21,7 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public ResponseEntity<Category> findById(Long id){
+    public ResponseEntity<Category> findById(String id){
         Optional<Category> optionalCategory = categoryRepository.findById(id);
         if(optionalCategory.isPresent()){
             Category category = optionalCategory.get();

@@ -1,4 +1,4 @@
-package com.analitrix.sellbook.dto;
+package com.analitrix.sellbook.dto.book;
 
 import com.analitrix.sellbook.entity.Category;
 

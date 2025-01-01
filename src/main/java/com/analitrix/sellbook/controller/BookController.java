@@ -1,14 +1,9 @@
 package com.analitrix.sellbook.controller;
 
-import java.util.List;
-import java.util.Objects;
-
-import com.analitrix.sellbook.dto.BookDtoGet;
-import com.analitrix.sellbook.dto.BookDtoPreview;
-import com.analitrix.sellbook.dto.BookDtoPut;
+import com.analitrix.sellbook.dto.book.BookDtoGet;
+import com.analitrix.sellbook.dto.book.BookDtoPost;
+import com.analitrix.sellbook.dto.book.BookDtoPut;
 import com.analitrix.sellbook.dto.ResponseHttp;
-import com.analitrix.sellbook.entity.Book;
-import com.analitrix.sellbook.entity.Category;
 import com.analitrix.sellbook.filters.BookPaginationDto;
 import com.analitrix.sellbook.service.BookService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,12 +20,12 @@ public class BookController {
 	private BookService bookService;
 
 	@PostMapping("")
-	public ResponseEntity<ResponseHttp> create(@RequestBody BookDtoGet bookDtoGet) {
-		return bookService.create(bookDtoGet);
+	public ResponseEntity<ResponseHttp> create(@RequestBody BookDtoPost bookDtoPost) {
+		return bookService.create(bookDtoPost);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ResponseHttp> findOneById(@PathVariable Long id) {
+	public ResponseEntity<ResponseHttp> findOneById(@PathVariable String id) {
 		return bookService.findOneById(id);
 	}
 
@@ -45,7 +40,7 @@ public class BookController {
 	}
 
 	@GetMapping("/topcategory/{id}")
-	public ResponseEntity<ResponseHttp> findTopByCategory(@PathVariable Long id) {
+	public ResponseEntity<ResponseHttp> findTopByCategory(@PathVariable String id) {
 		return bookService.findTopByCategory(id);
 	}
 
@@ -55,7 +50,7 @@ public class BookController {
 	}
 
 	@GetMapping("/category/{categorySearch}")
-	public ResponseEntity<ResponseHttp> findByCategory(@PathVariable Long categorySearch) {
+	public ResponseEntity<ResponseHttp> findByCategory(@PathVariable String categorySearch) {
 		return bookService.findByCategory(categorySearch);
 	}
 
@@ -65,12 +60,12 @@ public class BookController {
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<ResponseHttp> update(@PathVariable Long id, @RequestBody BookDtoPut bookDtoPut) {
+	public ResponseEntity<ResponseHttp> update(@PathVariable String id, @RequestBody BookDtoPut bookDtoPut) {
 		return bookService.update(id,bookDtoPut);
 	}
 
 	@DeleteMapping("/{id}")
-		public ResponseEntity<ResponseHttp> delete(@PathVariable Long id) {
+		public ResponseEntity<ResponseHttp> delete(@PathVariable String id) {
 			return bookService.delete(id);
 		}
 	}

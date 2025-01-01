@@ -1,4 +1,4 @@
-package com.analitrix.sellbook.dto;
+package com.analitrix.sellbook.dto.book;
 
 import com.analitrix.sellbook.entity.Category;
 import lombok.*;
@@ -6,6 +6,7 @@ import lombok.*;
 @Data
 
 public class BookDtoPut {
+    private Long isxn;
     private String title;
     private Long publicationDate;
     private Long units;

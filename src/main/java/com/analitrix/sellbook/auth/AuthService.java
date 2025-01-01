@@ -1,7 +1,7 @@
 package com.analitrix.sellbook.auth;
 
-import com.analitrix.sellbook.entity.Person;
-import com.analitrix.sellbook.repository.PersonRepository;
+import com.analitrix.sellbook.entity.User;
+import com.analitrix.sellbook.repository.UserRepository;
 import com.analitrix.sellbook.jwt.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     @Autowired
-    private PersonRepository personRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private JwtService jwtService;
@@ -25,7 +25,7 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getMail(), request.getPassword()));
-        UserDetails user=personRepository.findByMail(request.getMail());
+        UserDetails user= userRepository.findByMail(request.getMail());
         String token=jwtService.getToken(user);
         return AuthResponse.builder()
                 .token(token)
@@ -33,17 +33,17 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest request){
-        Person person = new Person();
-        person.setMail(request.getMail());
-        person.setId(request.getId());
-        person.setName(request.getName());
-        person.setSurname(request.getSurname());
-        person.setPhone(request.getPhone());
-        person.setHomeAddress(request.getHomeAddress());
-        person.setPassword(passwordEncoder.encode(request.getPassword()));
-        personRepository.save(person);
+        User user = new User();
+        user.setMail(request.getMail());
+        user.setId(request.getId());
+        user.setName(request.getName());
+        user.setSurname(request.getSurname());
+        user.setPhone(request.getPhone());
+        user.setHomeAddress(request.getHomeAddress());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        userRepository.save(user);
         return AuthResponse.builder()
-                .token(jwtService.getToken(person))
+                .token(jwtService.getToken(user))
                 .build();
     }
 }

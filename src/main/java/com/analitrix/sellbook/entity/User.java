@@ -1,18 +1,16 @@
 package com.analitrix.sellbook.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -20,11 +18,13 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Person implements UserDetails {
+public class User implements UserDetails {
 
 	@Id
+	private String id= UUID.randomUUID().toString();
+	private Long documentType;
 	@Column(unique = true)
-	private Long id;
+	private Long documentNumber;
 	private String name;
 	private String surname;
 	@Column(unique = true)

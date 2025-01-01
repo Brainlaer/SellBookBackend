@@ -1,4 +1,4 @@
-package com.analitrix.sellbook.dto;
+package com.analitrix.sellbook.dto.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonDtoId {
-
-	private Long id;
+public class BookDtoId{
+	private String id;
 }

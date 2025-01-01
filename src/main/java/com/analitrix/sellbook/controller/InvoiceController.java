@@ -1,10 +1,6 @@
 package com.analitrix.sellbook.controller;
 
-import java.util.List;
-
-import com.analitrix.sellbook.dto.BookDtoId;
 import com.analitrix.sellbook.dto.InvoiceDtoCreate;
-import com.analitrix.sellbook.dto.PersonDtoId;
 import com.analitrix.sellbook.service.InvoiceService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
