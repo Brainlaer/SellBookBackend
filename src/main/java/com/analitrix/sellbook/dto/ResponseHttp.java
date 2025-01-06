@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseHttp {
-    private String status;
-    private Object response;
+    private int code;
+    private Object detail;
 }
