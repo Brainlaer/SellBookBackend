@@ -4,6 +4,8 @@ package com.analitrix.sellbook.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "categories")
 @Getter
@@ -11,9 +13,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Category{
+public class Category {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String id= UUID.randomUUID().toString();
+	@Column(unique = true)
 	private String name;
 }

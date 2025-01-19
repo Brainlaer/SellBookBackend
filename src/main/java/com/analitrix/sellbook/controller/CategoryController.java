@@ -1,16 +1,16 @@
 package com.analitrix.sellbook.controller;
 
-import com.analitrix.sellbook.entity.Category;
+import com.analitrix.sellbook.helpers.dto.ResponseHttp;
+import com.analitrix.sellbook.dto.book.CategoryDto;
 import com.analitrix.sellbook.service.CategoryService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Path;
-import java.util.List;
-
+@Tag(name="Category")
 @RestController
-@RequestMapping("/sellbook/category")
+@RequestMapping("/api/v1/category")
 @CrossOrigin(origins = "*")
 
 public class CategoryController {
@@ -18,14 +18,18 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/findAll")
-    public List<Category> findAll(){
+    @GetMapping("")
+    public ResponseEntity<?> findAll(){
         return categoryService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> findById(@PathVariable Long id){
+    public ResponseEntity<?> findById(@PathVariable String id){
         return  categoryService.findById(id);
     }
 
+    @PostMapping("")
+    public ResponseEntity<ResponseHttp> create(@RequestBody CategoryDto categoryDto){
+        return categoryService.create(categoryDto);
+    }
 }
