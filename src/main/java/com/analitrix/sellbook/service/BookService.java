@@ -1,20 +1,23 @@
 package com.analitrix.sellbook.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
 
-import com.analitrix.sellbook.dto.book.BookDtoGet;
-import com.analitrix.sellbook.dto.book.BookDtoPost;
-import com.analitrix.sellbook.dto.book.BookDtoPreview;
-import com.analitrix.sellbook.dto.book.BookDtoPut;
-import com.analitrix.sellbook.dto.ResponseHttp;
+import com.analitrix.sellbook.dto.book.*;
+import com.analitrix.sellbook.helpers.dto.FilterDto;
+import com.analitrix.sellbook.helpers.dto.ResponseHttp;
+import com.analitrix.sellbook.helpers.dto.FlattenDto;
 import com.analitrix.sellbook.entity.Book;
 import com.analitrix.sellbook.entity.Category;
 import com.analitrix.sellbook.repository.BookRepository;
 import com.analitrix.sellbook.repository.CategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,177 +33,87 @@ public class BookService {
 
 	ModelMapper modelMapper = new ModelMapper();
 
-	public ResponseEntity<ResponseHttp> create(BookDtoPost bookDtoPost) {
-		if (!bookRepository.existByIsxn(bookDtoPost.getIsxn())) {
-			Book book = modelMapper.map(bookDtoPost, Book.class);
-			bookRepository.save(book);
-			return new ResponseEntity<>(new ResponseHttp("CREATED","Libro: "+ bookDtoPost.getTitle()+", Guardado correctamente."), HttpStatus.CREATED);
-		}else{
-			return new ResponseEntity<>(new ResponseHttp("BAD_REQUEST","El libro con el id: "+bookDtoPost.getIsxn()+", ya existe."), HttpStatus.BAD_REQUEST);
+	public ResponseEntity<ResponseHttp> create(BookPostDto bookPostDto) {
+		Optional<Category> categoryOptional = categoryRepository.findById(bookPostDto.getCategoryId());
+		if (categoryOptional.isEmpty())
+			return new ResponseEntity<>(new ResponseHttp(204, "Categoria no encontrada"), HttpStatus.NO_CONTENT);
+		if (bookRepository.findByIsxn(bookPostDto.getIsxn()).isPresent())
+			return new ResponseEntity<>(new ResponseHttp(406, "El libro con el isxn: " + bookPostDto.getIsxn() + ", ya existe."), HttpStatus.CONFLICT);
+		Book book = modelMapper.map(bookPostDto, Book.class);
+		book.setId(UUID.randomUUID().toString());
+		book.setCategory(categoryOptional.get());
+		bookRepository.save(book);
+		return new ResponseEntity<>(new ResponseHttp(201, "Libro: " + bookPostDto.getTitle() + ", Creado correctamente."), HttpStatus.CREATED);
+	}
+
+	public ResponseEntity<ResponseHttp> createAll(List<BookPostDto> booksPostDto) {
+		List<Book> books = new ArrayList<>();
+		for (BookPostDto bookPostDto:booksPostDto){
+			Optional<Category> categoryOptional = categoryRepository.findById(bookPostDto.getCategoryId());
+			if (categoryOptional.isEmpty())
+				return new ResponseEntity<>(new ResponseHttp(204, "Categoria no encontrada"), HttpStatus.NO_CONTENT);
+			if (bookRepository.findByIsxn(bookPostDto.getIsxn()).isPresent())
+				return new ResponseEntity<>(new ResponseHttp(406, "El libro con el isxn: " + bookPostDto.getIsxn() + ", ya existe."), HttpStatus.CONFLICT);
+			Book book = modelMapper.map(bookPostDto, Book.class);
+			book.setId(UUID.randomUUID().toString());
+			book.setCategory(categoryOptional.get());
+			books.add(book);
 		}
+		bookRepository.saveAll(books);
+		return new ResponseEntity<>(new ResponseHttp(201, "Libros creados correctamente."), HttpStatus.CREATED);
 	}
 
 	public ResponseEntity<ResponseHttp> findOneById(String id) {
 		Optional<Book> optionalBook = bookRepository.findById(id);
 		if (optionalBook.isPresent()) {
-			BookDtoGet bookDtoGet = modelMapper.map(optionalBook.get(), BookDtoGet.class);
-			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGet), HttpStatus.OK);
+			BookGetDto bookGetDto = modelMapper.map(optionalBook.get(), BookGetDto.class);
+			return new ResponseEntity<>(new ResponseHttp(200, bookGetDto), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No existe libro con el id: "+id+"."),HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(new ResponseHttp(404,"No existe libro con el id: "+id+"."),HttpStatus.NOT_FOUND);
 		}
 	}
 
-	public ResponseEntity<ResponseHttp> findOrderedByDateDesc() {
-		List<Book> bookList = bookRepository.findTop10ByOrderByModificationDateDesc();
-		if (!bookList.isEmpty()) {
-			List<BookDtoGet> bookDtoGetList = new ArrayList<>();
-			for (Book book:bookList){
-				BookDtoGet bookDtoGet = modelMapper.map(book, BookDtoGet.class);
-				bookDtoGetList.add(bookDtoGet);
-			}
-			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGetList), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No se encontraron libros."),HttpStatus.NOT_FOUND);
-		}
+	public Page<Book> searchBooks(String title, String author, String editorial, String category, Pageable pageable) {
+		Specification<Book> spec = BookSpecifications.filterBy(title, author, editorial, category);
+		return bookRepository.findAll(spec, pageable);
 	}
 
-	public ResponseEntity<ResponseHttp> findRecentlyAdded() {
-		List<Book> bookList = bookRepository.findTop10ByOrderByModificationDateDesc();
-		if (!bookList.isEmpty()) {
-			List<BookDtoGet> bookDtoGetList = new ArrayList<>();
-			for (Book book:bookList){
-				BookDtoGet bookDtoGet = modelMapper.map(book, BookDtoGet.class);
-				bookDtoGetList.add(bookDtoGet);
-			}
-			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGetList), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No se encontraron libros."),HttpStatus.NOT_FOUND);
-		}
-	}
-
-	public ResponseEntity<ResponseHttp> findTopByCategory(String id) {
-		Optional<Category> category=categoryRepository.findById(id);
-		List<Book> bookList = bookRepository.findTop10ByCategory(category.get());
-		if (!bookList.isEmpty()) {
-			List<BookDtoGet> bookDtoGetList = new ArrayList<>();
-			for (Book book:bookList){
-				BookDtoGet bookDtoGet = modelMapper.map(book, BookDtoGet.class);
-				bookDtoGetList.add(bookDtoGet);
-			}
-			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGetList), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No se encontraron libros."),HttpStatus.NOT_FOUND);
-		}
-	}
-
-	public ResponseEntity<ResponseHttp> findByTitleAndAuthor(String stringSearch) {
-		List<Book> bookListTitleAuthor = bookRepository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(stringSearch, stringSearch);
-		List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
-		if (!bookListTitleAuthor.isEmpty()) {
-			for (Book book : bookListTitleAuthor) {
-				BookDtoPreview bookDtoPreview = modelMapper.map(book, BookDtoPreview.class);
-				bookDtoPreviewList.add(bookDtoPreview);
-			}
-			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoPreviewList), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No hay libros para la busqueda: "+stringSearch+"."),HttpStatus.NOT_FOUND);
-		}
-	}
-
-	public ResponseEntity<ResponseHttp> findByTitleAndAuthorAllData(String stringSearch) {
-		List<Book> bookListTitleAuthor = bookRepository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(stringSearch, stringSearch);
-		List<BookDtoGet> bookDtoGetList = new ArrayList<>();
-		if (!bookListTitleAuthor.isEmpty()) {
-			for (Book book : bookListTitleAuthor) {
-				BookDtoGet bookDtoGet = modelMapper.map(book, BookDtoGet.class);
-				bookDtoGetList.add(bookDtoGet);
-			}
-			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGetList), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No hay libros para la busqueda: "+stringSearch+"."),HttpStatus.NOT_FOUND);
-		}
-	}
-
-	public ResponseEntity<ResponseHttp> findById(String idSearch){
-		List<Book> bookList = bookRepository.findAll();
-		List<BookDtoGet> bookDtoGetList = new ArrayList<>();
-		for (Book book:bookList){
-			String idBook=book.getIsxn().toString();
-			if(idBook.contains(idSearch)){
-				BookDtoGet bookDtoGet = modelMapper.map(book, BookDtoGet.class);
-				bookDtoGetList.add(bookDtoGet);
-			}
-		}
-		if(!bookDtoGetList.isEmpty()){
-			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoGetList), HttpStatus.OK);
-		}else {
-			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No hay libros para la busqueda: "+idSearch+"."),HttpStatus.NOT_FOUND);
-		}
-	}
-
-	public ResponseEntity<ResponseHttp> findByCategory(String categorySearch) {
-		List<Book> bookList = bookRepository.findAllByCategoryId(categorySearch);
-		if (!bookList.isEmpty()) {
-			List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
-			for (Book book : bookList) {
-				BookDtoPreview bookDtoPreview = modelMapper.map(book, BookDtoPreview.class);
-				bookDtoPreviewList.add(bookDtoPreview);
-			}
-			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoPreviewList) ,HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No se encontraron libros en esta categoria."),HttpStatus.NOT_FOUND);
-		}
-	}
-
-	public ResponseEntity<ResponseHttp> findByTitleAuthorAndCategory(Long categorySearch, String stringSearch){
-		List<Book> bookListCategoryAndTitleOrAuthor = bookRepository.findByCategoryAndTitleAuthor(categorySearch, stringSearch);
-		List<BookDtoPreview> bookDtoPreviewList = new ArrayList<>();
-		if (!bookListCategoryAndTitleOrAuthor.isEmpty()) {
-			for (Book book : bookListCategoryAndTitleOrAuthor) {
-				BookDtoPreview bookDtoPreview = modelMapper.map(book, BookDtoPreview.class);
-				bookDtoPreviewList.add(bookDtoPreview);
-			}
-			return new ResponseEntity<>(new ResponseHttp("OK",bookDtoPreviewList), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","No hay libros para la busqueda: "+stringSearch+", en esta categoria."),HttpStatus.NOT_FOUND);
-		}
-	}
-
-
-
-	public ResponseEntity<ResponseHttp> update(String id,BookDtoPut bookDtoPut) {
+	public ResponseEntity<ResponseHttp> update(String id, BookPutDto bookPutDto) {
 		Optional<Book> optionalBook = bookRepository.findById(id);
 		if (optionalBook.isPresent()) {
 			Book book = optionalBook.get();
-			BookDtoPut bookDto = modelMapper.map(book, BookDtoPut.class);
-			if(bookDtoPut.toString().equals(bookDto.toString())){
-				return new ResponseEntity<>(new ResponseHttp("NOT_MODIFIED","No hay cambios para el libro: "+bookDtoPut.getTitle()+"."),HttpStatus.OK);
+			BookPutDto bookDto = modelMapper.map(book, BookPutDto.class);
+			if(bookPutDto.toString().equals(bookDto.toString())){
+				return new ResponseEntity<>(new ResponseHttp(305,"No hay cambios para el libro: "+ bookPutDto.getTitle()+"."),HttpStatus.OK);
 			}
-			if(bookDtoPut.getIsxn()!=null){
-				book.setIsxn(bookDtoPut.getIsxn());
-			}if(bookDtoPut.getTitle()!=null){
-				book.setTitle(bookDtoPut.getTitle());
-			} if(bookDtoPut.getAuthor()!=null){
-				book.setAuthor(bookDtoPut.getAuthor());
-			} if(bookDtoPut.getEditorial()!=null){
-				book.setEditorial(bookDtoPut.getEditorial());
-			} if(bookDtoPut.getPublicationDate()!=null){
-				book.setPublicationDate(bookDtoPut.getPublicationDate());
-			} if(bookDtoPut.getUnits()!=null){
-				book.setUnits(bookDtoPut.getUnits());
-			} if(bookDtoPut.getCost()!=null){
-				book.setCost(bookDtoPut.getCost());
-			} if(bookDtoPut.getImage()!=null){
-				book.setImage(bookDtoPut.getImage());
-			} if(bookDtoPut.getCategory()!=null){
-				book.setCategory(bookDtoPut.getCategory());
+			if(bookPutDto.getIsxn()!=null){
+				book.setIsxn(bookPutDto.getIsxn());
+			}if(bookPutDto.getTitle()!=null){
+				book.setTitle(bookPutDto.getTitle());
+			} if(bookPutDto.getAuthor()!=null){
+				book.setAuthor(bookPutDto.getAuthor());
+			} if(bookPutDto.getEditorial()!=null){
+				book.setEditorial(bookPutDto.getEditorial());
+			} if(bookPutDto.getPublicationDate()!=null){
+				book.setPublicationDate(bookPutDto.getPublicationDate());
+			} if(bookPutDto.getUnits()!=null){
+				book.setUnits(bookPutDto.getUnits());
+			} if(bookPutDto.getCost()!=null){
+				book.setCost(bookPutDto.getCost());
+			} if(bookPutDto.getImage()!=null){
+				book.setImage(bookPutDto.getImage());
+			} if(bookPutDto.getCategoryId()!=null){
+				Optional<Category> categoryOptional = categoryRepository.findById(bookPutDto.getCategoryId());
+				if (categoryOptional.isEmpty())
+					return new ResponseEntity<>(new ResponseHttp(204, "Categoria no encontrada"), HttpStatus.NO_CONTENT);
+				book.setCategory(categoryOptional.get());
 			}
 			book.setAvailability();
 			book.modify();
 			bookRepository.save(book);
-			return new ResponseEntity<>(new ResponseHttp("OK","Libro: "+bookDtoPut.getTitle()+", actualizado con exito."), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseHttp(200,"Libro: "+ bookPutDto.getTitle()+", actualizado con exito."), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","Libro con el id: "+id+", no existe."), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(new ResponseHttp(404,"Libro con el id: "+id+", no existe."), HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -208,9 +121,47 @@ public class BookService {
 		Optional<Book> book = bookRepository.findById(id);
 		if (book.isPresent()) {
 			bookRepository.deleteById(id);
-			return new ResponseEntity<>(new ResponseHttp("OK","libro: "+book.get().getTitle()+", eliminado con exito"), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseHttp(200,"libro: "+book.get().getTitle()+", eliminado con exito"), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResponseHttp("NOT_FOUND","Libro con el id: "+id+", no existe."), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(new ResponseHttp(404,"Libro con el id: "+id+", no existe."), HttpStatus.NOT_FOUND);
 		}
 	}
+
+	private String queryBuilder(BookRequestDto request) {
+		StringBuilder query = new StringBuilder("SELECT b FROM Book b ");
+		boolean whereAdded = false;
+
+		if (request.getIsxn() != null || request.getTitle() != null || request.getEditorial() != null
+				|| request.getAuthor() != null || request.getCategory() != null) {
+			query.append("WHERE ");
+
+			if (request.getIsxn() != null) {
+				query.append("CAST(b.isxn AS string) LIKE CONCAT('%', :isxn, '%')");
+				whereAdded = true;
+			}
+			if (request.getTitle() != null) {
+				if (whereAdded) query.append(" OR ");
+				query.append("LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%'))");
+				whereAdded = true;
+			}
+			if (request.getEditorial() != null) {
+				if (whereAdded) query.append(" OR ");
+				query.append("LOWER(b.editorial) LIKE LOWER(CONCAT('%', :editorial, '%'))");
+				whereAdded = true;
+			}
+			if (request.getAuthor() != null) {
+				if (whereAdded) query.append(" OR ");
+				query.append("LOWER(b.author) LIKE LOWER(CONCAT('%', :author, '%'))");
+				whereAdded = true;
+			}
+			if (request.getCategory() != null) {
+				if (whereAdded) query.append(" OR ");
+				query.append("LOWER(b.category) LIKE LOWER(CONCAT('%', :category, '%'))");
+			}
+		}
+
+		query.append(" ORDER BY b.modificationDate");
+		return query.toString();
+	}
+
 }

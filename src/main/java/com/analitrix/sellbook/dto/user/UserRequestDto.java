@@ -1,15 +1,11 @@
 package com.analitrix.sellbook.dto.user;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.analitrix.sellbook.helpers.dto.RequestGetDto;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UserRequestDto {
+public class UserRequestDto extends RequestGetDto {
     private UserFilterableColumnsEnum filterBy;
-    private String filter;
-    private Boolean flatten;
-    private int limit;
-    private int offset;
 }

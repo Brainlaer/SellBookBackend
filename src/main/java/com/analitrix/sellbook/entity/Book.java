@@ -17,7 +17,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Book {
-	
 	@Id
 	private String id= UUID.randomUUID().toString();
 	@Column(unique = true)

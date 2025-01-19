@@ -1,41 +1,51 @@
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/auth/LoginRequest.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Tracking.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/PersonRepository.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/InvoicePerson.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/InvoiceController.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/InvoiceBook.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/InvoiceBookRepository.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/config/SecurityConfig.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Person.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/BookDtoId.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/auth/RegisterRequest.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/BookRepository.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/CategoryService.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Category.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/PersonController.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/InvoiceRepository.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/InvoicePersonRepository.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/CategoryRepository.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/SellbookApplication.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/BookDtoGet.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/auth/AuthController.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Book.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/CategoryController.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/config/ApplicationConfig.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/BookController.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/PersonService.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/BookService.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/BookDtoPreview.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/auth/AuthResponse.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/ResponseHttp.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/jwt/JwtAuthenticationFilter.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Invoice.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/PersonDtoId.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/auth/AuthService.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/InvoiceDtoCreate.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/BookRequestDto.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/BookDtoPut.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/TrackingRepository.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/InvoiceService.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/PersonDtoDelete.java
-/Users/dreamcode/Documents/personal/more personal/super personal/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/jwt/JwtService.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookDtoPreview.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/UserRepository.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Book.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/jwt/JwtAuthenticationFilter.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/auth/LoginRequest.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/TrackingRepository.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/UserController.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Category.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/helpers/dto/RequestGetDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Tracking.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/BookRepository.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/InvoiceBook.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookGetDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/BookService.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/AuthController.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/helpers/dto/FilterDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookPutDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserFilterableColumnsEnum.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/InvoiceBookRepository.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/InvoiceRepository.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/auth/RegisterRequest.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Invoice.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserGetDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/auth/AuthResponse.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookRequestDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/User.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/InvoiceService.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/CategoryRepository.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/helpers/dto/ResponseHttp.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/CategoryController.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserPutDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/InvoiceUserRepository.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookFilterableColumnsEnum.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/PaginationDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/CategoryDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/InvoiceController.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/helpers/dto/FlattenDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserRequestDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookSpecifications.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/jwt/JwtService.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/config/SecurityConfig.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/InvoiceUser.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/InvoiceCreateDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/CategoryService.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/BookController.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/UserService.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookPostDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/SellbookApplication.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserDeleteDto.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/config/ApplicationConfig.java
+/home/bsteven/Documents/Workspace/SellBook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/AuthService.java

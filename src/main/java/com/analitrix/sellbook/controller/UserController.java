@@ -1,21 +1,15 @@
 package com.analitrix.sellbook.controller;
 
-import com.analitrix.sellbook.dto.ResponseHttp;
+import com.analitrix.sellbook.helpers.dto.ResponseHttp;
 import com.analitrix.sellbook.dto.user.UserDeleteDto;
-import com.analitrix.sellbook.dto.user.UserFilterableColumnsEnum;
 import com.analitrix.sellbook.dto.user.UserPutDto;
 import com.analitrix.sellbook.dto.user.UserRequestDto;
 import com.analitrix.sellbook.service.UserService;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.hibernate.annotations.Parameter;
 import org.modelmapper.ModelMapper;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name="User")
@@ -34,14 +28,14 @@ public class UserController {
 
 	ModelMapper modelMapper=new ModelMapper();
 
-	@GetMapping("/")
+	@GetMapping("")
 	public ResponseEntity<?> findUsers(
 			@ParameterObject UserRequestDto userRequestDto
 			){
 		return userService.findUsers(userRequestDto);
 	}
 	
-	@PutMapping("/{id}")
+	@PatchMapping("/{id}")
 	public ResponseEntity<ResponseHttp> updateUser(
 			@PathVariable String id,
 			@RequestBody UserPutDto userPutDto) {

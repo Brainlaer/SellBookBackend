@@ -1,6 +1,7 @@
 package com.analitrix.sellbook.controller;
 
-import com.analitrix.sellbook.dto.InvoiceDtoCreate;
+import com.analitrix.sellbook.dto.InvoiceCreateDto;
+import com.analitrix.sellbook.helpers.dto.ResponseHttp;
 import com.analitrix.sellbook.service.InvoiceService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,18 @@ public class InvoiceController {
 	@Autowired
 	private InvoiceService invoiceService;
 
-	@PostMapping("/create")
-	public ResponseEntity<String> createInvoice(@RequestBody InvoiceDtoCreate invoiceDtoCreate) {
-		return invoiceService.createInvoice(invoiceDtoCreate);
+	@GetMapping("")
+	public ResponseEntity<?> findAll() {
+		return invoiceService.findAll();
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<?> findById(String id) {
+		return invoiceService.findById(id);
+	}
+
+	@PostMapping("")
+	public ResponseEntity<ResponseHttp> create(@RequestBody InvoiceCreateDto invoiceCreateDto) {
+		return invoiceService.create(invoiceCreateDto);
 	}
 }

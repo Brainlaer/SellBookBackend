@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name = "invoice_user")
+@Table(name = "invoice_users")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,7 +20,6 @@ public class InvoiceUser {
     @Column(name="user_id", unique = true)
     private String user;
     private Long documentNumber;
-    @Column(name="fullname")
     private String fullName;
     @Column(unique = true)
     private Long phone;

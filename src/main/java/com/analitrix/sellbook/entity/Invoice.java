@@ -20,15 +20,16 @@ public class Invoice {
     @Id
     private String id= UUID.randomUUID().toString();
     @Column(name = "expedition_date")
-    private Date expeditionDate;
+    private Date creationDate;
     @Column(name = "total_cost")
     private double totalCost;
-    private String tracking;
 
     @OneToOne
     @JoinColumn(name = "invoice_user_id")
     private InvoiceUser invoiceUser;
-
+    @OneToOne
+    @JoinColumn(name = "tracking_id")
+    private Tracking tracking;
 
     @PrePersist
     public void prePersist() {
@@ -36,6 +37,6 @@ public class Invoice {
     }
 
     public Date expedite() {
-        return this.expeditionDate=new Date();
+        return this.creationDate=new Date();
     }
 }
