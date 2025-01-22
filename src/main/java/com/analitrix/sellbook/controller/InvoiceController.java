@@ -1,10 +1,13 @@
 package com.analitrix.sellbook.controller;
 
 import com.analitrix.sellbook.dto.InvoiceCreateDto;
+import com.analitrix.sellbook.dto.InvoiceRequestDto;
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
 import com.analitrix.sellbook.service.InvoiceService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +20,13 @@ public class InvoiceController {
 	private InvoiceService invoiceService;
 
 	@GetMapping("")
-	public ResponseEntity<?> findAll() {
-		return invoiceService.findAll();
+	public Page<?> findAll(@ParameterObject InvoiceRequestDto invoiceRequestDto) {
+		return invoiceService.findAll(invoiceRequestDto);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(String id) {
-		return invoiceService.findById(id);
+	public ResponseEntity<?> findOne(String id) {
+		return invoiceService.findOne(id);
 	}
 
 	@PostMapping("")

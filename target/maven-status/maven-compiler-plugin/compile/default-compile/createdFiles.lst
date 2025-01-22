@@ -21,6 +21,7 @@ com/analitrix/sellbook/entity/Category.class
 com/analitrix/sellbook/repository/CategoryRepository.class
 com/analitrix/sellbook/controller/InvoiceController.class
 com/analitrix/sellbook/auth/AuthResponse$AuthResponseBuilder.class
+com/analitrix/sellbook/dto/InvoiceSortableColumnsEnum.class
 com/analitrix/sellbook/dto/book/BookPutDto.class
 com/analitrix/sellbook/auth/AuthResponse.class
 com/analitrix/sellbook/service/CategoryService.class
@@ -35,6 +36,7 @@ com/analitrix/sellbook/entity/InvoiceBook.class
 com/analitrix/sellbook/entity/Book.class
 com/analitrix/sellbook/repository/UserRepository.class
 com/analitrix/sellbook/config/SecurityConfig.class
+com/analitrix/sellbook/dto/InvoiceRequestDto.class
 com/analitrix/sellbook/dto/InvoiceCreateDto.class
 com/analitrix/sellbook/dto/user/UserDeleteDto.class
 com/analitrix/sellbook/dto/PaginationDto.class
@@ -42,6 +44,7 @@ com/analitrix/sellbook/dto/book/BookPostDto.class
 com/analitrix/sellbook/controller/UserController.class
 com/analitrix/sellbook/helpers/dto/FilterDto.class
 com/analitrix/sellbook/entity/Tracking.class
+com/analitrix/sellbook/dto/InvoiceSpecifications.class
 com/analitrix/sellbook/entity/User.class
 com/analitrix/sellbook/entity/Invoice.class
 com/analitrix/sellbook/entity/InvoiceUser.class
