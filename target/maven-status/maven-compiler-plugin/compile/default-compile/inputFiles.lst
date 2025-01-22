@@ -2,7 +2,6 @@
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookGetDto.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/InvoiceBook.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/UserRepository.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookFilterableColumnsEnum.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/CategoryDto.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/config/SecurityConfig.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserRequestDto.java
@@ -12,12 +11,14 @@
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookPostDto.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/BookRepository.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/UserController.java
+/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/SortEnum.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/CategoryService.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/helpers/dto/ResponseHttp.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/BookController.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/UserService.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/auth/LoginRequest.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/config/ApplicationConfig.java
+/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookSortableColumnsEnum.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/InvoiceRepository.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookRequestDto.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserDeleteDto.java
@@ -31,8 +32,6 @@
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/InvoiceUser.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/AuthService.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/SellbookApplication.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookDtoPreview.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/SoftEnum.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/helpers/dto/FlattenDto.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserGetDto.java
 /home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/CategoryRepository.java

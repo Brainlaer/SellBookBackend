@@ -3,6 +3,7 @@ package com.analitrix.sellbook.service;
 import java.util.*;
 import java.util.function.Function;
 
+import com.analitrix.sellbook.dto.SortEnum;
 import com.analitrix.sellbook.dto.book.*;
 import com.analitrix.sellbook.helpers.dto.FilterDto;
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
@@ -63,7 +64,7 @@ public class BookService {
 		return new ResponseEntity<>(new ResponseHttp(201, "Libros creados correctamente."), HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<ResponseHttp> findOneById(String id) {
+	public ResponseEntity<ResponseHttp> findOne(String id) {
 		Optional<Book> optionalBook = bookRepository.findById(id);
 		if (optionalBook.isPresent()) {
 			BookGetDto bookGetDto = modelMapper.map(optionalBook.get(), BookGetDto.class);
@@ -73,8 +74,15 @@ public class BookService {
 		}
 	}
 
-	public Page<Book> searchBooks(String title, String author, String editorial, String category, Pageable pageable) {
-		Specification<Book> spec = BookSpecifications.filterBy(title, author, editorial, category);
+	public Page<Book> findAll(BookRequestDto request) {
+		Sort sort = null;
+		if(request.getSort().equals(SortEnum.ASC)) {
+			sort = Sort.by(Sort.Order.asc(request.getSortableColumn().toString()));
+		}else if(request.getSort().equals(SortEnum.DESC)){
+			sort = Sort.by(Sort.Order.desc(request.getSortableColumn().toString()));
+		}
+		Specification<Book> spec = BookSpecifications.filterBy(request.getIsxn(),request.getTitle(), request.getAuthor(), request.getEditorial(), request.getCategory());
+		Pageable pageable= PageRequest.of(request.getOffset(), request.getLimit(),sort);
 		return bookRepository.findAll(spec, pageable);
 	}
 

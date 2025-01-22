@@ -23,7 +23,7 @@ public class User implements UserDetails {
 	@Id
 	private String id= UUID.randomUUID().toString();
 	private String documentType;
-	@Column(unique = true)
+	@Column(unique = true, name = "document_number")
 	private Long documentNumber;
 	private String name;
 	private String surname;
