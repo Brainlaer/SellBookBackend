@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequest {
+public class LoginRequestDto {
     @Schema(defaultValue = "pablo.perez@example.com")
     private String mail;
     @Schema(defaultValue = "pass123456")

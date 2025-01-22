@@ -1,8 +1,8 @@
 package com.analitrix.sellbook.controller;
 
-import com.analitrix.sellbook.dto.book.BookPostDto;
-import com.analitrix.sellbook.dto.book.BookPutDto;
-import com.analitrix.sellbook.entity.Book;
+import com.analitrix.sellbook.dto.book.BookCreateDto;
+import com.analitrix.sellbook.dto.book.BookUpdateDto;
+import com.analitrix.sellbook.model.Book;
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
 import com.analitrix.sellbook.dto.book.BookRequestDto;
 import com.analitrix.sellbook.service.BookService;
@@ -10,11 +10,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tag(name="Book")
 @RestController
@@ -26,8 +23,8 @@ public class BookController {
 	private BookService bookService;
 
 	@PostMapping("")
-	public ResponseEntity<ResponseHttp> create(@RequestBody BookPostDto bookPostDto) {
-		return bookService.create(bookPostDto);
+	public ResponseEntity<ResponseHttp> create(@RequestBody BookCreateDto bookCreateDto) {
+		return bookService.create(bookCreateDto);
 	}
 //	@PostMapping("/all")
 //	public ResponseEntity<ResponseHttp> createAll(@RequestBody List<BookPostDto> booksPostDto) {
@@ -45,8 +42,8 @@ public class BookController {
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<ResponseHttp> update(@PathVariable String id, @RequestBody BookPutDto bookPutDto) {
-		return bookService.update(id, bookPutDto);
+	public ResponseEntity<ResponseHttp> update(@PathVariable String id, @RequestBody BookUpdateDto bookUpdateDto) {
+		return bookService.update(id, bookUpdateDto);
 	}
 
 	@DeleteMapping("/{id}")

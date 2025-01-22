@@ -1,17 +1,14 @@
 package com.analitrix.sellbook.dto.user;
 
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-public class UserPutDto {
+public class UserUpdateDto {
     @Schema(defaultValue = "Cedula")
     private String documentType;
     @Schema(defaultValue = "123456789")

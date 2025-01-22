@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestGetDto {
+public class PaginationDto {
     private int limit=10;
     private int offset=0;
 }

@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
+public class RegisterRequestDto {
     @Schema(defaultValue = "Cedula")
     private String documentType;
     @Schema(defaultValue = "123456789")

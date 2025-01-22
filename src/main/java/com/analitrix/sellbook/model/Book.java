@@ -1,4 +1,4 @@
-package com.analitrix.sellbook.entity;
+package com.analitrix.sellbook.model;
 
 
 import java.util.Date;

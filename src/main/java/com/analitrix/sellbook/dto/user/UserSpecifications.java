@@ -1,6 +1,6 @@
 package com.analitrix.sellbook.dto.user;
 
-import com.analitrix.sellbook.entity.User;
+import com.analitrix.sellbook.model.User;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 

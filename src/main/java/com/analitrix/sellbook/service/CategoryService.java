@@ -2,8 +2,8 @@ package com.analitrix.sellbook.service;
 
 
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
-import com.analitrix.sellbook.dto.book.CategoryDto;
-import com.analitrix.sellbook.entity.Category;
+import com.analitrix.sellbook.dto.book.CategoryCreateDto;
+import com.analitrix.sellbook.model.Category;
 import com.analitrix.sellbook.repository.CategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +42,10 @@ public class CategoryService {
 
     }
 
-    public ResponseEntity<ResponseHttp> create(CategoryDto categoryDto){
-        Optional<Category> categoryOptional= categoryRepository.findByName(categoryDto.getName());
+    public ResponseEntity<ResponseHttp> create(CategoryCreateDto categoryCreateDto){
+        Optional<Category> categoryOptional= categoryRepository.findByName(categoryCreateDto.getName());
         if(categoryOptional.isPresent())return new ResponseEntity<>(new ResponseHttp(409,"Categoria ya existe"), HttpStatus.CONFLICT);
-        Category category = modelMapper.map(categoryDto, Category.class);
+        Category category = modelMapper.map(categoryCreateDto, Category.class);
         categoryRepository.save(category);
         return new ResponseEntity<>(new ResponseHttp(201,"Categoria creada"),HttpStatus.CREATED);
     }

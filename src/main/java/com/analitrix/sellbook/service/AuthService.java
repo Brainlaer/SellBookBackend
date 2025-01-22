@@ -1,9 +1,9 @@
 package com.analitrix.sellbook.service;
 
-import com.analitrix.sellbook.auth.AuthResponse;
-import com.analitrix.sellbook.dto.auth.LoginRequest;
-import com.analitrix.sellbook.dto.auth.RegisterRequest;
-import com.analitrix.sellbook.entity.User;
+import com.analitrix.sellbook.auth.AuthResponseDto;
+import com.analitrix.sellbook.dto.auth.LoginRequestDto;
+import com.analitrix.sellbook.dto.auth.RegisterRequestDto;
+import com.analitrix.sellbook.model.User;
 import com.analitrix.sellbook.repository.UserRepository;
 import com.analitrix.sellbook.jwt.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +26,16 @@ public class AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public AuthResponse login(LoginRequest request){
+    public AuthResponseDto login(LoginRequestDto request){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getMail(), request.getPassword()));
         UserDetails user= userRepository.findByMail(request.getMail());
         String token=jwtService.getToken(user);
-        return AuthResponse.builder()
+        return AuthResponseDto.builder()
                 .token(token)
                 .build();
     }
 
-    public AuthResponse register(RegisterRequest request){
+    public AuthResponseDto register(RegisterRequestDto request){
         User user = new User();
         user.setMail(request.getMail());
         user.setDocumentNumber(request.getDocumentNumber());
@@ -46,7 +46,7 @@ public class AuthService {
         user.setHomeAddress(request.getHomeAddress());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         userRepository.save(user);
-        return AuthResponse.builder()
+        return AuthResponseDto.builder()
                 .token(jwtService.getToken(user))
                 .build();
     }

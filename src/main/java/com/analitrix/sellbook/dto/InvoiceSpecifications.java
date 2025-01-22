@@ -1,7 +1,6 @@
 package com.analitrix.sellbook.dto;
 
-import com.analitrix.sellbook.entity.Book;
-import com.analitrix.sellbook.entity.Invoice;
+import com.analitrix.sellbook.model.Invoice;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 

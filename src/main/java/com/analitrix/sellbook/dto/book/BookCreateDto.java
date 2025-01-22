@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BookPostDto {
+public class BookCreateDto {
     private Long isxn;
     private String title;
     private Long publicationDate;

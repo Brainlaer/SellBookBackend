@@ -1,15 +1,8 @@
 package com.analitrix.sellbook.repository;
 
-import java.security.SecureRandom;
-import java.util.List;
 import java.util.Optional;
 
-import com.analitrix.sellbook.dto.book.BookRequestDto;
-import com.analitrix.sellbook.entity.Book;
-import com.analitrix.sellbook.entity.Category;
-import com.analitrix.sellbook.entity.User;
-import com.analitrix.sellbook.helpers.dto.FilterDto;
-import com.analitrix.sellbook.helpers.dto.FlattenDto;
+import com.analitrix.sellbook.model.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

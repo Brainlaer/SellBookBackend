@@ -1,9 +1,9 @@
 package com.analitrix.sellbook.controller;
 
-import com.analitrix.sellbook.auth.AuthResponse;
+import com.analitrix.sellbook.auth.AuthResponseDto;
 import com.analitrix.sellbook.service.AuthService;
-import com.analitrix.sellbook.dto.auth.LoginRequest;
-import com.analitrix.sellbook.dto.auth.RegisterRequest;
+import com.analitrix.sellbook.dto.auth.LoginRequestDto;
+import com.analitrix.sellbook.dto.auth.RegisterRequestDto;
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,12 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request){
+    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto request){
         return ResponseEntity.ok(authService.login(request));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
+    public ResponseEntity<AuthResponseDto> register(@RequestBody RegisterRequestDto request){
         return ResponseEntity.ok(authService.register(request));
     }
 

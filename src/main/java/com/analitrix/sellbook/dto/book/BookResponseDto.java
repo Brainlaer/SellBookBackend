@@ -1,6 +1,6 @@
 package com.analitrix.sellbook.dto.book;
 
-import com.analitrix.sellbook.entity.Category;
+import com.analitrix.sellbook.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookGetDto {
+public class BookResponseDto {
     private String id;
     private Long isxn;
     private String title;

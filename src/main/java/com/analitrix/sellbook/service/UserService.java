@@ -7,7 +7,7 @@ import java.util.Optional;
 import com.analitrix.sellbook.dto.SortEnum;
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
 import com.analitrix.sellbook.dto.user.*;
-import com.analitrix.sellbook.entity.User;
+import com.analitrix.sellbook.model.User;
 import com.analitrix.sellbook.helpers.dto.FlattenDto;
 import com.analitrix.sellbook.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -42,9 +42,9 @@ public class UserService {
 		Optional<User> userOptional = userRepository.findById(id);
 
 		if (userOptional.isEmpty()) return new ResponseEntity<>(new ResponseHttp(404,"No encontrado"), HttpStatus.NOT_FOUND);
-		UserGetDto userGetDto = modelMapper.map(userOptional.get(),UserGetDto.class);
+		UserResponseDto userResponseDto = modelMapper.map(userOptional.get(), UserResponseDto.class);
 
-		return new ResponseEntity<>(new ResponseHttp(200, userGetDto),HttpStatus.OK);
+		return new ResponseEntity<>(new ResponseHttp(200, userResponseDto),HttpStatus.OK);
 	}
 
 	public Page<?> findAll(UserRequestDto request){
@@ -59,27 +59,27 @@ public class UserService {
 		return userRepository.findAll(spec, pageable);
 	}
 
-	public ResponseEntity<ResponseHttp> update(String id, UserPutDto userPutDto) {
+	public ResponseEntity<ResponseHttp> update(String id, UserUpdateDto userUpdateDto) {
 		Optional<User> userOptional = userRepository.findById(id);
 
 		if (userOptional.isEmpty()) return new ResponseEntity<>(new ResponseHttp(404, "No encontrado"), HttpStatus.NOT_FOUND);
 		User user=userOptional.get();
-		if(!user.getDocumentType().equals(userPutDto.getDocumentType())){
-			user.setDocumentType(userPutDto.getDocumentType());
-		}if(!user.getDocumentNumber().equals(userPutDto.getDocumentNumber())){
-			user.setDocumentNumber(userPutDto.getDocumentNumber());
-		}if(!user.getName().equals(userPutDto.getName())){
-			user.setName(userPutDto.getName());
-		}if(!user.getSurname().equals(userPutDto.getSurname())){
-			user.setSurname(userPutDto.getSurname());
-		}if(!user.getPhone().equals(userPutDto.getPhone())){
-			user.setPhone(userPutDto.getPhone());
-		}if(!user.getMail().equals(userPutDto.getMail())){
-			user.setMail(userPutDto.getMail());
-		}if(!user.getHomeAddress().equals(userPutDto.getHomeAddress())){
-			user.setHomeAddress(userPutDto.getHomeAddress());
-		}if(!userPutDto.getPassword().isEmpty()){
-			user.setPassword(passwordEncoder.encode(userPutDto.getPassword()));
+		if(!user.getDocumentType().equals(userUpdateDto.getDocumentType())){
+			user.setDocumentType(userUpdateDto.getDocumentType());
+		}if(!user.getDocumentNumber().equals(userUpdateDto.getDocumentNumber())){
+			user.setDocumentNumber(userUpdateDto.getDocumentNumber());
+		}if(!user.getName().equals(userUpdateDto.getName())){
+			user.setName(userUpdateDto.getName());
+		}if(!user.getSurname().equals(userUpdateDto.getSurname())){
+			user.setSurname(userUpdateDto.getSurname());
+		}if(!user.getPhone().equals(userUpdateDto.getPhone())){
+			user.setPhone(userUpdateDto.getPhone());
+		}if(!user.getMail().equals(userUpdateDto.getMail())){
+			user.setMail(userUpdateDto.getMail());
+		}if(!user.getHomeAddress().equals(userUpdateDto.getHomeAddress())){
+			user.setHomeAddress(userUpdateDto.getHomeAddress());
+		}if(!userUpdateDto.getPassword().isEmpty()){
+			user.setPassword(passwordEncoder.encode(userUpdateDto.getPassword()));
 		}
 		userRepository.save(user);
 		return new ResponseEntity<>(new ResponseHttp(200, "Actualizado con exito"), HttpStatus.OK);

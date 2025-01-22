@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserGetDto {
+public class UserResponseDto {
     private String id;
     private String documentType;
     private Long documentNumber;

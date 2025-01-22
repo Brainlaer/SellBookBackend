@@ -2,7 +2,7 @@ package com.analitrix.sellbook.controller;
 
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
 import com.analitrix.sellbook.dto.user.UserDeleteDto;
-import com.analitrix.sellbook.dto.user.UserPutDto;
+import com.analitrix.sellbook.dto.user.UserUpdateDto;
 import com.analitrix.sellbook.dto.user.UserRequestDto;
 import com.analitrix.sellbook.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,8 +39,8 @@ public class UserController {
 	@PatchMapping("/{id}")
 	public ResponseEntity<ResponseHttp> updateUser(
 			@PathVariable String id,
-			@RequestBody UserPutDto userPutDto) {
-		return userService.update(id,userPutDto);
+			@RequestBody UserUpdateDto userUpdateDto) {
+		return userService.update(id, userUpdateDto);
 	}
 	
 	@DeleteMapping("/{id}")

@@ -1,14 +1,13 @@
 package com.analitrix.sellbook.dto.book;
 
 import com.analitrix.sellbook.dto.SortEnum;
-import com.analitrix.sellbook.dto.user.UserSortableColumnsEnum;
-import com.analitrix.sellbook.helpers.dto.RequestGetDto;
+import com.analitrix.sellbook.helpers.dto.PaginationDto;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class BookRequestDto extends RequestGetDto {
+public class BookRequestDto extends PaginationDto {
      private String isxn;
      private String title;
      private String author;
