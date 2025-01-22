@@ -2,8 +2,9 @@ com/analitrix/sellbook/helpers/dto/FlattenDto.class
 com/analitrix/sellbook/dto/book/CategoryDto.class
 com/analitrix/sellbook/dto/user/UserPutDto.class
 com/analitrix/sellbook/repository/BookRepository.class
+com/analitrix/sellbook/dto/book/BookSortableColumnsEnum.class
+com/analitrix/sellbook/dto/book/BookRequestDto.class
 com/analitrix/sellbook/jwt/JwtAuthenticationFilter.class
-com/analitrix/sellbook/dto/book/BookFilterableColumnsEnum.class
 com/analitrix/sellbook/dto/auth/LoginRequest.class
 com/analitrix/sellbook/controller/BookController.class
 com/analitrix/sellbook/dto/auth/RegisterRequest.class
@@ -13,8 +14,8 @@ com/analitrix/sellbook/dto/book/BookSpecifications.class
 com/analitrix/sellbook/repository/InvoiceRepository.class
 com/analitrix/sellbook/controller/AuthController.class
 com/analitrix/sellbook/service/BookService.class
+com/analitrix/sellbook/dto/SortEnum.class
 com/analitrix/sellbook/dto/user/UserGetDto.class
-com/analitrix/sellbook/dto/user/UserFilterableColumnsEnum.class
 com/analitrix/sellbook/service/AuthService.class
 com/analitrix/sellbook/entity/Category.class
 com/analitrix/sellbook/repository/CategoryRepository.class
@@ -23,6 +24,7 @@ com/analitrix/sellbook/auth/AuthResponse$AuthResponseBuilder.class
 com/analitrix/sellbook/dto/book/BookPutDto.class
 com/analitrix/sellbook/auth/AuthResponse.class
 com/analitrix/sellbook/service/CategoryService.class
+com/analitrix/sellbook/dto/user/UserSortableColumnsEnum.class
 com/analitrix/sellbook/jwt/JwtService.class
 com/analitrix/sellbook/dto/book/BookGetDto.class
 com/analitrix/sellbook/service/InvoiceService.class
@@ -41,9 +43,10 @@ com/analitrix/sellbook/controller/UserController.class
 com/analitrix/sellbook/helpers/dto/FilterDto.class
 com/analitrix/sellbook/entity/Tracking.class
 com/analitrix/sellbook/entity/User.class
-com/analitrix/sellbook/config/ApplicationConfig.class
 com/analitrix/sellbook/entity/Invoice.class
 com/analitrix/sellbook/entity/InvoiceUser.class
+com/analitrix/sellbook/config/ApplicationConfig.class
+com/analitrix/sellbook/dto/user/UserSpecifications.class
 com/analitrix/sellbook/helpers/dto/RequestGetDto.class
 com/analitrix/sellbook/repository/InvoiceUserRepository.class
 com/analitrix/sellbook/SellbookApplication.class
