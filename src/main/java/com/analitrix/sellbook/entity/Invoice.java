@@ -20,7 +20,7 @@ public class Invoice {
     @Id
     private String id= UUID.randomUUID().toString();
     @Column(name = "expedition_date")
-    private Date creationDate;
+    private Date expeditionDate;
     @Column(name = "total_cost")
     private double totalCost;
 
@@ -37,6 +37,6 @@ public class Invoice {
     }
 
     public Date expedite() {
-        return this.creationDate=new Date();
+        return this.expeditionDate=new Date();
     }
 }

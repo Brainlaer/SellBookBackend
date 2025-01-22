@@ -8,10 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookSpecifications {
-    public static Specification<Book> filterBy(String title, String author, String editorial, String category) {
+    public static Specification<Book> filterBy(String isxn, String title, String author, String editorial, String category) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
+            if (isxn != null && !isxn.isEmpty()) {
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("isxn").as(String.class)), "%" + isxn.toLowerCase() + "%"));
+            }
             if (title != null && !title.isEmpty()) {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + title.toLowerCase() + "%"));
             }
@@ -22,7 +25,7 @@ public class BookSpecifications {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("editorial")), "%" + editorial.toLowerCase() + "%"));
             }
             if (category != null && !category.isEmpty()) {
-                predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get("category")), category.toLowerCase()));
+                predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get("category").as(String.class)), category.toLowerCase()));
             }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };

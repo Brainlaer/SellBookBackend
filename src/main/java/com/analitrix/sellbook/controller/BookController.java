@@ -36,18 +36,12 @@ public class BookController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ResponseHttp> findOneById(@PathVariable String id) {
-		return bookService.findOneById(id);
+		return bookService.findOne(id);
 	}
 
 	@GetMapping("")
-	public Page<Book> searchBooks(
-			@RequestParam(required = false) String title,
-			@RequestParam(required = false) String author,
-			@RequestParam(required = false) String editorial,
-			@RequestParam(required = false) String category,
-			Pageable pageable
-	) {
-		return bookService.searchBooks(title, author, editorial, category, pageable);
+	public Page<Book> searchBooks(@ParameterObject BookRequestDto requestDto) {
+		return bookService.findAll(requestDto);
 	}
 
 	@PatchMapping("/{id}")

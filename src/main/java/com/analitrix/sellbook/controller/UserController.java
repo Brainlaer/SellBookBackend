@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,29 +24,29 @@ public class UserController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findById(@PathVariable String id){
-		return userService.findById(id);
+		return userService.findOne(id);
 	}
 
 	ModelMapper modelMapper=new ModelMapper();
 
 	@GetMapping("")
-	public ResponseEntity<?> findUsers(
+	public Page<?> findUsers(
 			@ParameterObject UserRequestDto userRequestDto
 			){
-		return userService.findUsers(userRequestDto);
+		return userService.findAll(userRequestDto);
 	}
 	
 	@PatchMapping("/{id}")
 	public ResponseEntity<ResponseHttp> updateUser(
 			@PathVariable String id,
 			@RequestBody UserPutDto userPutDto) {
-		return userService.updateUser(id,userPutDto);
+		return userService.update(id,userPutDto);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ResponseHttp> deleteUser(
 			@PathVariable String id,
 			@RequestBody UserDeleteDto userDeleteDto) {
-		return userService.deleteUser(id, userDeleteDto);
+		return userService.delete(id, userDeleteDto);
 	}
 }
