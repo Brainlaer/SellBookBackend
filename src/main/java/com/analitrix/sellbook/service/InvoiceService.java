@@ -4,11 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.analitrix.sellbook.dto.InvoiceRequestDto;
+import com.analitrix.sellbook.dto.InvoiceSpecifications;
+import com.analitrix.sellbook.dto.SortEnum;
+import com.analitrix.sellbook.dto.book.BookSpecifications;
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
 import com.analitrix.sellbook.dto.InvoiceCreateDto;
 import com.analitrix.sellbook.entity.*;
 import com.analitrix.sellbook.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -34,7 +43,7 @@ public class InvoiceService {
     @Autowired
     private InvoiceUserRepository invoiceUserRepository;
 
-	public ResponseEntity<ResponseHttp> findById(String id){
+	public ResponseEntity<ResponseHttp> findOne(String id){
 		Optional<Invoice> invoiceOptional=invoiceRepository.findById(id);
 		if(invoiceOptional.isPresent()){
 			return new ResponseEntity<>(new ResponseHttp(200, invoiceOptional),HttpStatus.OK);
@@ -43,13 +52,16 @@ public class InvoiceService {
 		}
 	}
 
-	public ResponseEntity<ResponseHttp> findAll(){
-		List<Invoice> invoices=invoiceRepository.findAll();
-		if(invoices.stream().count()>0){
-			return new ResponseEntity<>(new ResponseHttp(200,invoices) ,HttpStatus.OK);
-		}else{
-			return new ResponseEntity<>(new ResponseHttp(204, "No hay contenido"),HttpStatus.CREATED);
-		}
+	public Page<?> findAll(InvoiceRequestDto request){
+        Sort sort = null;
+        if(request.getSort().equals(SortEnum.ASC)) {
+            sort = Sort.by(Sort.Order.asc(request.getSortableColumn().toString()));
+        }else if(request.getSort().equals(SortEnum.DESC)){
+            sort = Sort.by(Sort.Order.desc(request.getSortableColumn().toString()));
+        }
+        Specification<Invoice> spec = InvoiceSpecifications.filterBy(request.getInvoiceUser());
+        Pageable pageable= PageRequest.of(request.getOffset(), request.getLimit(),sort);
+        return invoiceRepository.findAll(spec, pageable);
 	}
 
     public ResponseEntity<ResponseHttp> create(InvoiceCreateDto invoiceCreateDto) {
