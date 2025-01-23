@@ -132,42 +132,4 @@ public class BookService {
 			return new ResponseEntity<>(new ResponseHttp(404,"Libro con el id: "+id+", no existe."), HttpStatus.NOT_FOUND);
 		}
 	}
-
-	private String queryBuilder(BookRequestDto request) {
-		StringBuilder query = new StringBuilder("SELECT b FROM Book b ");
-		boolean whereAdded = false;
-
-		if (request.getIsxn() != null || request.getTitle() != null || request.getEditorial() != null
-				|| request.getAuthor() != null || request.getCategory() != null) {
-			query.append("WHERE ");
-
-			if (request.getIsxn() != null) {
-				query.append("CAST(b.isxn AS string) LIKE CONCAT('%', :isxn, '%')");
-				whereAdded = true;
-			}
-			if (request.getTitle() != null) {
-				if (whereAdded) query.append(" OR ");
-				query.append("LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%'))");
-				whereAdded = true;
-			}
-			if (request.getEditorial() != null) {
-				if (whereAdded) query.append(" OR ");
-				query.append("LOWER(b.editorial) LIKE LOWER(CONCAT('%', :editorial, '%'))");
-				whereAdded = true;
-			}
-			if (request.getAuthor() != null) {
-				if (whereAdded) query.append(" OR ");
-				query.append("LOWER(b.author) LIKE LOWER(CONCAT('%', :author, '%'))");
-				whereAdded = true;
-			}
-			if (request.getCategory() != null) {
-				if (whereAdded) query.append(" OR ");
-				query.append("LOWER(b.category) LIKE LOWER(CONCAT('%', :category, '%'))");
-			}
-		}
-
-		query.append(" ORDER BY b.modificationDate");
-		return query.toString();
-	}
-
 }

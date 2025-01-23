@@ -97,19 +97,4 @@ public class UserService {
 		return new ResponseEntity<>(new ResponseHttp(200,"Eliminado con exito"), HttpStatus.OK);
 
 	}
-
-
-	public List<FlattenDto> findUsersflatten(){
-		List<User> users=userRepository.findAll();
-		List<FlattenDto> usersDto = new ArrayList<>();
-		System.out.println("4");
-		if(users.stream().count()>0){
-			for(User user : users){
-				FlattenDto flattenDto =modelMapper.map(user, FlattenDto.class);
-				usersDto.add(flattenDto);
-			}
-		}
-		return usersDto;
-	}
-
 }
