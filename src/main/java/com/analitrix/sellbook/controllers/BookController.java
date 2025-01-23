@@ -3,7 +3,7 @@ package com.analitrix.sellbook.controllers;
 import com.analitrix.sellbook.dtos.book.BookCreateDto;
 import com.analitrix.sellbook.dtos.book.BookUpdateDto;
 import com.analitrix.sellbook.models.Book;
-import com.analitrix.sellbook.dtos.ResponseHttp;
+import com.analitrix.sellbook.dtos.common.ResponseHttp;
 import com.analitrix.sellbook.dtos.book.BookRequestDto;
 import com.analitrix.sellbook.services.BookService;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -2,7 +2,7 @@ package com.analitrix.sellbook.dtos.user;
 
 import com.analitrix.sellbook.enums.SortEnum;
 import com.analitrix.sellbook.enums.UserSortableColumnsEnum;
-import com.analitrix.sellbook.dtos.PaginationDto;
+import com.analitrix.sellbook.dtos.common.PaginationDto;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,7 +1,7 @@
 package com.analitrix.sellbook.services;
 
 
-import com.analitrix.sellbook.dtos.ResponseHttp;
+import com.analitrix.sellbook.dtos.common.ResponseHttp;
 import com.analitrix.sellbook.dtos.category.CategoryCreateDto;
 import com.analitrix.sellbook.models.Category;
 import com.analitrix.sellbook.repositories.CategoryRepository;

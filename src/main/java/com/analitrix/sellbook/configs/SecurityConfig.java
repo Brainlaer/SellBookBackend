@@ -1,6 +1,6 @@
 package com.analitrix.sellbook.configs;
 
-import com.analitrix.sellbook.jwt.JwtAuthenticationFilter;
+import com.analitrix.sellbook.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

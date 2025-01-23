@@ -1,6 +1,6 @@
 package com.analitrix.sellbook.controllers;
 
-import com.analitrix.sellbook.dtos.ResponseHttp;
+import com.analitrix.sellbook.dtos.common.ResponseHttp;
 import com.analitrix.sellbook.dtos.user.UserDeleteDto;
 import com.analitrix.sellbook.dtos.user.UserUpdateDto;
 import com.analitrix.sellbook.dtos.user.UserRequestDto;

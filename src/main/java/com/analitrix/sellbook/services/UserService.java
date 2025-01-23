@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.analitrix.sellbook.enums.SortEnum;
-import com.analitrix.sellbook.dtos.ResponseHttp;
+import com.analitrix.sellbook.dtos.common.ResponseHttp;
 import com.analitrix.sellbook.dtos.user.*;
 import com.analitrix.sellbook.models.User;
-import com.analitrix.sellbook.dtos.FlattenDto;
+import com.analitrix.sellbook.dtos.common.FlattenDto;
 import com.analitrix.sellbook.repositories.UserRepository;
 import com.analitrix.sellbook.specifications.UserSpecifications;
 import org.modelmapper.ModelMapper;

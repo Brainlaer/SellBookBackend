@@ -4,7 +4,7 @@ import com.analitrix.sellbook.dtos.auth.AuthResponseDto;
 import com.analitrix.sellbook.services.AuthService;
 import com.analitrix.sellbook.dtos.auth.LoginRequestDto;
 import com.analitrix.sellbook.dtos.auth.RegisterRequestDto;
-import com.analitrix.sellbook.dtos.ResponseHttp;
+import com.analitrix.sellbook.dtos.common.ResponseHttp;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

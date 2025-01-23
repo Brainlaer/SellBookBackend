@@ -4,7 +4,7 @@ import java.util.*;
 
 import com.analitrix.sellbook.enums.SortEnum;
 import com.analitrix.sellbook.dtos.book.*;
-import com.analitrix.sellbook.dtos.ResponseHttp;
+import com.analitrix.sellbook.dtos.common.ResponseHttp;
 import com.analitrix.sellbook.models.Book;
 import com.analitrix.sellbook.models.Category;
 import com.analitrix.sellbook.repositories.BookRepository;

@@ -1,4 +1,4 @@
-package com.analitrix.sellbook.jwt;
+package com.analitrix.sellbook.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

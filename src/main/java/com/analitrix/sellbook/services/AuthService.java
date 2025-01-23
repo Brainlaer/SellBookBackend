@@ -5,7 +5,7 @@ import com.analitrix.sellbook.dtos.auth.LoginRequestDto;
 import com.analitrix.sellbook.dtos.auth.RegisterRequestDto;
 import com.analitrix.sellbook.models.User;
 import com.analitrix.sellbook.repositories.UserRepository;
-import com.analitrix.sellbook.jwt.JwtService;
+import com.analitrix.sellbook.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

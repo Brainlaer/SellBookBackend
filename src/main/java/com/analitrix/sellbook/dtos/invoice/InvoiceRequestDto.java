@@ -1,7 +1,7 @@
 package com.analitrix.sellbook.dtos.invoice;
 
 import com.analitrix.sellbook.enums.SortEnum;
-import com.analitrix.sellbook.dtos.PaginationDto;
+import com.analitrix.sellbook.dtos.common.PaginationDto;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -7,7 +7,7 @@ import java.util.Optional;
 import com.analitrix.sellbook.dtos.invoice.InvoiceRequestDto;
 import com.analitrix.sellbook.specifications.InvoiceSpecifications;
 import com.analitrix.sellbook.enums.SortEnum;
-import com.analitrix.sellbook.dtos.ResponseHttp;
+import com.analitrix.sellbook.dtos.common.ResponseHttp;
 import com.analitrix.sellbook.dtos.invoice.InvoiceCreateDto;
 import com.analitrix.sellbook.models.*;
 import com.analitrix.sellbook.repositories.*;

@@ -2,7 +2,7 @@ package com.analitrix.sellbook.controllers;
 
 import com.analitrix.sellbook.dtos.invoice.InvoiceCreateDto;
 import com.analitrix.sellbook.dtos.invoice.InvoiceRequestDto;
-import com.analitrix.sellbook.dtos.ResponseHttp;
+import com.analitrix.sellbook.dtos.common.ResponseHttp;
 import com.analitrix.sellbook.services.InvoiceService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.ParameterObject;

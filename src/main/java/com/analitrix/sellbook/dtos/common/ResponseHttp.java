@@ -1,4 +1,5 @@
-package com.analitrix.sellbook.dtos;
+package com.analitrix.sellbook.dtos.common;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaginationDto {
-    private int limit=10;
-    private int offset=0;
+public class ResponseHttp {
+    private int code;
+    private Object detail;
 }
