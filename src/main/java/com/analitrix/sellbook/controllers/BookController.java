@@ -27,18 +27,18 @@ public class BookController {
 		return bookService.create(bookCreateDto);
 	}
 //	@PostMapping("/all")
-//	public ResponseEntity<ResponseHttp> createAll(@RequestBody List<BookPostDto> booksPostDto) {
+//	public ResponseEntity<ResponseHttp> createMany(@RequestBody List<BookPostDto> booksPostDto) {
 //		return bookService.createAll(booksPostDto);
 //	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ResponseHttp> findOneById(@PathVariable String id) {
+	public ResponseEntity<ResponseHttp> findOne(@PathVariable String id) {
 		return bookService.findOne(id);
 	}
 
 	@GetMapping("")
-	public Page<Book> searchBooks(@ParameterObject BookRequestDto requestDto) {
-		return bookService.findAll(requestDto);
+	public Page<Book> findMany(@ParameterObject BookRequestDto requestDto) {
+		return bookService.findMany(requestDto);
 	}
 
 	@PatchMapping("/{id}")

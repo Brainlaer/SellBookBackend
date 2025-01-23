@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InvoiceRequestDto extends PaginationDto {
-    private String invoiceUser;
+    private String user;
     private SortEnum sort=SortEnum.ASC;
     private InvoiceSortableColumnsEnum sortableColumn=InvoiceSortableColumnsEnum.expeditionDate;
 

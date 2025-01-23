@@ -51,14 +51,14 @@ public class InvoiceService {
 		}
 	}
 
-	public Page<?> findAll(InvoiceRequestDto request){
+	public Page<?> findMany(InvoiceRequestDto request){
         Sort sort = null;
         if(request.getSort().equals(SortEnum.ASC)) {
             sort = Sort.by(Sort.Order.asc(request.getSortableColumn().toString()));
         }else if(request.getSort().equals(SortEnum.DESC)){
             sort = Sort.by(Sort.Order.desc(request.getSortableColumn().toString()));
         }
-        Specification<Invoice> spec = InvoiceSpecifications.filterBy(request.getInvoiceUser());
+        Specification<Invoice> spec = InvoiceSpecifications.filterBy(request.getUser());
         Pageable pageable= PageRequest.of(request.getOffset(), request.getLimit(),sort);
         return invoiceRepository.findAll(spec, pageable);
 	}

@@ -31,7 +31,7 @@ public class CategoryService {
         }
     }
 
-    public ResponseEntity<ResponseHttp> findById(String id){
+    public ResponseEntity<ResponseHttp> findOne(String id){
         Optional<Category> optionalCategory = categoryRepository.findById(id);
         if(optionalCategory.isPresent()){
             Category category = optionalCategory.get();

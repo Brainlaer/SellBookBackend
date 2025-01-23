@@ -48,7 +48,7 @@ public class UserService {
 		return new ResponseEntity<>(new ResponseHttp(200, userResponseDto),HttpStatus.OK);
 	}
 
-	public Page<?> findAll(UserRequestDto request){
+	public Page<?> findMany(UserRequestDto request){
 		Sort sort = null;
 		if(request.getSort().equals(SortEnum.ASC)) {
 			sort = Sort.by(Sort.Order.asc(request.getSortableColumn().toString()));

@@ -45,7 +45,7 @@ public class BookService {
 		return new ResponseEntity<>(new ResponseHttp(201, "Libro: " + bookCreateDto.getTitle() + ", Creado correctamente."), HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<ResponseHttp> createAll(List<BookCreateDto> booksPostDto) {
+	public ResponseEntity<ResponseHttp> createMany(List<BookCreateDto> booksPostDto) {
 		List<Book> books = new ArrayList<>();
 		for (BookCreateDto bookCreateDto :booksPostDto){
 			Optional<Category> categoryOptional = categoryRepository.findById(bookCreateDto.getCategoryId());
@@ -72,7 +72,7 @@ public class BookService {
 		}
 	}
 
-	public Page<Book> findAll(BookRequestDto request) {
+	public Page<Book> findMany(BookRequestDto request) {
 		Sort sort = null;
 		if(request.getSort().equals(SortEnum.ASC)) {
 			sort = Sort.by(Sort.Order.asc(request.getSortableColumn().toString()));

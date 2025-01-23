@@ -20,8 +20,8 @@ public class InvoiceController {
 	private InvoiceService invoiceService;
 
 	@GetMapping("")
-	public Page<?> findAll(@ParameterObject InvoiceRequestDto invoiceRequestDto) {
-		return invoiceService.findAll(invoiceRequestDto);
+	public Page<?> findMany(@ParameterObject InvoiceRequestDto invoiceRequestDto) {
+		return invoiceService.findMany(invoiceRequestDto);
 	}
 
 	@GetMapping("/{id}")

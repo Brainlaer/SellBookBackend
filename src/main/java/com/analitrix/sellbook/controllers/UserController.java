@@ -23,28 +23,26 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(@PathVariable String id){
+	public ResponseEntity<?> findOne(@PathVariable String id){
 		return userService.findOne(id);
 	}
 
 	ModelMapper modelMapper=new ModelMapper();
 
 	@GetMapping("")
-	public Page<?> findUsers(
-			@ParameterObject UserRequestDto userRequestDto
-			){
-		return userService.findAll(userRequestDto);
+	public Page<?> findMany(@ParameterObject UserRequestDto userRequestDto){
+		return userService.findMany(userRequestDto);
 	}
 	
 	@PatchMapping("/{id}")
-	public ResponseEntity<ResponseHttp> updateUser(
+	public ResponseEntity<ResponseHttp> update(
 			@PathVariable String id,
 			@RequestBody UserUpdateDto userUpdateDto) {
 		return userService.update(id, userUpdateDto);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseHttp> deleteUser(
+	public ResponseEntity<ResponseHttp> delete(
 			@PathVariable String id,
 			@RequestBody UserDeleteDto userDeleteDto) {
 		return userService.delete(id, userDeleteDto);
