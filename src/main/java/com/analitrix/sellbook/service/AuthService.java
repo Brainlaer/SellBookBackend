@@ -1,11 +1,11 @@
 package com.analitrix.sellbook.service;
 
-import com.analitrix.sellbook.auth.AuthResponse;
-import com.analitrix.sellbook.dto.auth.LoginRequest;
-import com.analitrix.sellbook.dto.auth.RegisterRequest;
-import com.analitrix.sellbook.entity.User;
+import com.analitrix.sellbook.security.auth.AuthResponse;
+import com.analitrix.sellbook.model.core.dto.auth.LoginRequest;
+import com.analitrix.sellbook.model.core.dto.auth.RegisterRequest;
+import com.analitrix.sellbook.model.security.User;
 import com.analitrix.sellbook.repository.UserRepository;
-import com.analitrix.sellbook.jwt.JwtService;
+import com.analitrix.sellbook.security.jwt.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

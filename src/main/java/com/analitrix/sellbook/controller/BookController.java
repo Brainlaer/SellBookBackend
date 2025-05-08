@@ -1,20 +1,17 @@
 package com.analitrix.sellbook.controller;
 
-import com.analitrix.sellbook.dto.book.BookPostDto;
-import com.analitrix.sellbook.dto.book.BookPutDto;
-import com.analitrix.sellbook.entity.Book;
+import com.analitrix.sellbook.model.core.dto.book.ProductPostDto;
+import com.analitrix.sellbook.model.core.dto.book.ProductPutDto;
+import com.analitrix.sellbook.model.core.Product;
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
-import com.analitrix.sellbook.dto.book.BookRequestDto;
-import com.analitrix.sellbook.service.BookService;
+import com.analitrix.sellbook.model.core.dto.book.BookRequestDto;
+import com.analitrix.sellbook.service.ProductService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tag(name="Book")
 @RestController
@@ -23,11 +20,11 @@ import java.util.List;
 public class BookController {
 
 	@Autowired
-	private BookService bookService;
+	private ProductService productService;
 
 	@PostMapping("")
-	public ResponseEntity<ResponseHttp> create(@RequestBody BookPostDto bookPostDto) {
-		return bookService.create(bookPostDto);
+	public ResponseEntity<ResponseHttp> create(@RequestBody ProductPostDto productPostDto) {
+		return productService.create(productPostDto);
 	}
 //	@PostMapping("/all")
 //	public ResponseEntity<ResponseHttp> createAll(@RequestBody List<BookPostDto> booksPostDto) {
@@ -36,21 +33,21 @@ public class BookController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ResponseHttp> findOneById(@PathVariable String id) {
-		return bookService.findOne(id);
+		return productService.findOne(id);
 	}
 
 	@GetMapping("")
-	public Page<Book> searchBooks(@ParameterObject BookRequestDto requestDto) {
-		return bookService.findAll(requestDto);
+	public Page<Product> searchBooks(@ParameterObject BookRequestDto requestDto) {
+		return productService.findAll(requestDto);
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<ResponseHttp> update(@PathVariable String id, @RequestBody BookPutDto bookPutDto) {
-		return bookService.update(id, bookPutDto);
+	public ResponseEntity<ResponseHttp> update(@PathVariable String id, @RequestBody ProductPutDto bookPutDto) {
+		return productService.update(id, bookPutDto);
 	}
 
 	@DeleteMapping("/{id}")
 		public ResponseEntity<ResponseHttp> delete(@PathVariable String id) {
-			return bookService.delete(id);
+			return productService.delete(id);
 		}
 	}

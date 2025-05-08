@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.analitrix.sellbook.dto.InvoiceRequestDto;
-import com.analitrix.sellbook.dto.InvoiceSpecifications;
-import com.analitrix.sellbook.dto.SortEnum;
-import com.analitrix.sellbook.dto.book.BookSpecifications;
+import com.analitrix.sellbook.model.core.dto.InvoiceRequestDto;
+import com.analitrix.sellbook.model.core.dto.InvoiceSpecifications;
+import com.analitrix.sellbook.model.core.dto.SortEnum;
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
-import com.analitrix.sellbook.dto.InvoiceCreateDto;
-import com.analitrix.sellbook.entity.*;
+import com.analitrix.sellbook.model.core.dto.InvoiceCreateDto;
+import com.analitrix.sellbook.model.security.User;
+import com.analitrix.sellbook.model.core.Order;
+import com.analitrix.sellbook.model.core.OrderDetail;
+import com.analitrix.sellbook.model.core.Product;
 import com.analitrix.sellbook.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,7 +34,7 @@ public class InvoiceService {
     private InvoiceBookRepository invoiceBookRepository;
 
     @Autowired
-    private BookRepository bookRepository;
+    private ProductRepository productRepository;
 
     @Autowired
     private TrackingRepository trackingRepository;
@@ -44,7 +46,7 @@ public class InvoiceService {
     private InvoiceUserRepository invoiceUserRepository;
 
 	public ResponseEntity<ResponseHttp> findOne(String id){
-		Optional<Invoice> invoiceOptional=invoiceRepository.findById(id);
+		Optional<Order> invoiceOptional=invoiceRepository.findById(id);
 		if(invoiceOptional.isPresent()){
 			return new ResponseEntity<>(new ResponseHttp(200, invoiceOptional),HttpStatus.OK);
 		}else{
@@ -59,7 +61,7 @@ public class InvoiceService {
         }else if(request.getSort().equals(SortEnum.DESC)){
             sort = Sort.by(Sort.Order.desc(request.getSortableColumn().toString()));
         }
-        Specification<Invoice> spec = InvoiceSpecifications.filterBy(request.getInvoiceUser());
+        Specification<Order> spec = InvoiceSpecifications.filterBy(request.getInvoiceUser());
         Pageable pageable= PageRequest.of(request.getOffset(), request.getLimit(),sort);
         return invoiceRepository.findAll(spec, pageable);
 	}
@@ -80,35 +82,35 @@ public class InvoiceService {
 		Tracking tracking = new Tracking();
 		tracking.setStatus("Accepted");
 
-        Invoice invoice = new Invoice();
-        invoice.setInvoiceUser(invoiceUser);
-		invoice.setTracking(tracking);
+        Order order = new Order();
+        order.setInvoiceUser(invoiceUser);
+		order.setTracking(tracking);
 
         if (invoiceCreateDto.getBooksId().isEmpty()) return new ResponseEntity<>(new ResponseHttp(204, "No hay libros en el carrito"), HttpStatus.NOT_FOUND);
 
-		List<InvoiceBook> invoiceBooks=new ArrayList<>();
-		List<Book> books = new ArrayList<>();
+		List<OrderDetail> orderDetails =new ArrayList<>();
+		List<Product> products = new ArrayList<>();
 
         for (String bookId : invoiceCreateDto.getBooksId()) {
-            Optional<Book> bookOptional = bookRepository.findById(bookId);
-            Book book = bookOptional.get();
-            if (bookOptional.isEmpty() || !book.isAvailable()) return new ResponseEntity<>(new ResponseHttp(204, "No se encontró algunos libros"), HttpStatus.NOT_FOUND);
-			InvoiceBook invoiceBook = new InvoiceBook();
-            invoiceBook.setIsxn(book.getIsxn());
-            invoiceBook.setTitle(book.getTitle());
-            invoiceBook.setCost(book.getCost());
-            invoiceBook.setInvoice(invoice);
-            book.sell();
-            book.setAvailability();
-            invoice.setTotalCost(invoice.getTotalCost() + invoiceBook.getCost());
-			invoiceBooks.add(invoiceBook);
-			books.add(book);
+            Optional<Product> bookOptional = productRepository.findById(bookId);
+            Product product = bookOptional.get();
+            if (bookOptional.isEmpty() || !product.isAvailable()) return new ResponseEntity<>(new ResponseHttp(204, "No se encontró algunos libros"), HttpStatus.NOT_FOUND);
+			OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setIsxn(product.getIsxn());
+            orderDetail.setTitle(product.getTitle());
+            orderDetail.setCost(product.getCost());
+            orderDetail.setOrder(order);
+            product.sell();
+            product.setAvailability();
+            order.setTotalCost(order.getTotalCost() + orderDetail.getCost());
+			orderDetails.add(orderDetail);
+			products.add(product);
         }
 		invoiceUserRepository.save(invoiceUser);
-		invoiceBookRepository.saveAll(invoiceBooks);
-		bookRepository.saveAll(books);
+		invoiceBookRepository.saveAll(orderDetails);
+		productRepository.saveAll(products);
         trackingRepository.save(tracking);
-		invoiceRepository.save(invoice);
+		invoiceRepository.save(order);
         return new ResponseEntity<>(new ResponseHttp(200,"Factura Generada"), HttpStatus.CREATED);
     }
 }

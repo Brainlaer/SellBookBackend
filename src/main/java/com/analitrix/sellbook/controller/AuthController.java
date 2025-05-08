@@ -1,9 +1,9 @@
 package com.analitrix.sellbook.controller;
 
-import com.analitrix.sellbook.auth.AuthResponse;
+import com.analitrix.sellbook.security.auth.AuthResponse;
 import com.analitrix.sellbook.service.AuthService;
-import com.analitrix.sellbook.dto.auth.LoginRequest;
-import com.analitrix.sellbook.dto.auth.RegisterRequest;
+import com.analitrix.sellbook.model.core.dto.auth.LoginRequest;
+import com.analitrix.sellbook.model.core.dto.auth.RegisterRequest;
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

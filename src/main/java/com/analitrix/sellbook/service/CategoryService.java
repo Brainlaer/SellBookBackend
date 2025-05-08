@@ -2,8 +2,8 @@ package com.analitrix.sellbook.service;
 
 
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
-import com.analitrix.sellbook.dto.book.CategoryDto;
-import com.analitrix.sellbook.entity.Category;
+import com.analitrix.sellbook.model.core.dto.book.CategoryDto;
+import com.analitrix.sellbook.model.core.Category;
 import com.analitrix.sellbook.repository.CategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

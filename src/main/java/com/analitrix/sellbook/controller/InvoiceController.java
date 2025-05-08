@@ -1,7 +1,7 @@
 package com.analitrix.sellbook.controller;
 
-import com.analitrix.sellbook.dto.InvoiceCreateDto;
-import com.analitrix.sellbook.dto.InvoiceRequestDto;
+import com.analitrix.sellbook.model.core.dto.InvoiceCreateDto;
+import com.analitrix.sellbook.model.core.dto.InvoiceRequestDto;
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
 import com.analitrix.sellbook.service.InvoiceService;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.analitrix.sellbook.dto.SortEnum;
+import com.analitrix.sellbook.model.core.dto.SortEnum;
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
-import com.analitrix.sellbook.dto.user.*;
-import com.analitrix.sellbook.entity.User;
+import com.analitrix.sellbook.model.core.dto.user.*;
+import com.analitrix.sellbook.model.security.User;
 import com.analitrix.sellbook.helpers.dto.FlattenDto;
 import com.analitrix.sellbook.repository.UserRepository;
 import org.modelmapper.ModelMapper;

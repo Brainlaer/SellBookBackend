@@ -1,7 +1,7 @@
 package com.analitrix.sellbook.controller;
 
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
-import com.analitrix.sellbook.dto.book.CategoryDto;
+import com.analitrix.sellbook.model.core.dto.book.CategoryDto;
 import com.analitrix.sellbook.service.CategoryService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
