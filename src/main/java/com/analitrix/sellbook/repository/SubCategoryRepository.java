@@ -1,17 +1,16 @@
 package com.analitrix.sellbook.repository;
 
 
-import com.analitrix.sellbook.model.core.dto.ObjectFlatten;
+import com.analitrix.sellbook.model.core.dto.FlattenDto;
 import com.analitrix.sellbook.model.core.SubCategory;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-public interface SubCategoryRepository {
-    List<SubCategory> findAll(UUID businessId);
-    List<SubCategory> findAllByCategoryId(UUID businessId, UUID categoryId);
-    SubCategory findById(UUID businessId, UUID id);
-    List<ObjectFlatten> findAllFlattenByCategoryId(UUID businessId, UUID categoryId);
-    SubCategory save(SubCategory subCategory);
-    SubCategory create(SubCategory subCategory);
+public interface SubCategoryRepository extends JpaRepository<SubCategory, UUID> {
+    List<SubCategory> findAllByBusiness(UUID businessId);
+    List<SubCategory> findAllByBusinessAndCategory(UUID businessId, UUID categoryId);
+    Optional<SubCategory> findByBusinessAndId(UUID businessId, UUID id);
 }

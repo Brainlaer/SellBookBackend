@@ -28,10 +28,10 @@ import org.springframework.stereotype.Service;
 public class InvoiceService {
 
     @Autowired
-    private InvoiceRepository invoiceRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
-    private InvoiceBookRepository invoiceBookRepository;
+    private OrderDetailRepository orderDetailRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -46,7 +46,7 @@ public class InvoiceService {
     private InvoiceUserRepository invoiceUserRepository;
 
 	public ResponseEntity<ResponseHttp> findOne(String id){
-		Optional<Order> invoiceOptional=invoiceRepository.findById(id);
+		Optional<Order> invoiceOptional= orderRepository.findById(id);
 		if(invoiceOptional.isPresent()){
 			return new ResponseEntity<>(new ResponseHttp(200, invoiceOptional),HttpStatus.OK);
 		}else{
@@ -63,7 +63,7 @@ public class InvoiceService {
         }
         Specification<Order> spec = InvoiceSpecifications.filterBy(request.getInvoiceUser());
         Pageable pageable= PageRequest.of(request.getOffset(), request.getLimit(),sort);
-        return invoiceRepository.findAll(spec, pageable);
+        return orderRepository.findAll(spec, pageable);
 	}
 
     public ResponseEntity<ResponseHttp> create(InvoiceCreateDto invoiceCreateDto) {
@@ -107,10 +107,10 @@ public class InvoiceService {
 			products.add(product);
         }
 		invoiceUserRepository.save(invoiceUser);
-		invoiceBookRepository.saveAll(orderDetails);
+		orderDetailRepository.saveAll(orderDetails);
 		productRepository.saveAll(products);
         trackingRepository.save(tracking);
-		invoiceRepository.save(order);
+		orderRepository.save(order);
         return new ResponseEntity<>(new ResponseHttp(200,"Factura Generada"), HttpStatus.CREATED);
     }
 }

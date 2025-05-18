@@ -6,8 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface UserRepository extends JpaRepository<User, String>, JpaSpecificationExecutor<User> {
-	User findByMail (String mail);
-	Page<User> findAll(Pageable pageable);
+import java.util.UUID;
 
+public interface UserRepository extends JpaRepository<User, UUID>, JpaSpecificationExecutor<User> {
+	User findByBusinessAndMail(String mail);
+	Page<User> findAllByBusiness(Pageable pageable);
 }

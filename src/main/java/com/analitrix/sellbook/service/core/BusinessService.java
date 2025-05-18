@@ -1,4 +1,4 @@
-package com.analitrix.sellbook.service;
+package com.analitrix.sellbook.service.core;
 
 import com.analitrix.sellbook.helpers.dto.ResponseHttp;
 import com.analitrix.sellbook.model.core.Business;
