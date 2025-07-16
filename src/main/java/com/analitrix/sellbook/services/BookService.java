@@ -24,15 +24,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookService {
 
-	@Autowired
-	private BookRepository bookRepository;
-	
-	@Autowired
-	private CategoryRepository categoryRepository;
 
+	private final BookRepository bookRepository;
+	private final CategoryRepository categoryRepository;
 	ModelMapper modelMapper = new ModelMapper();
 
-	public ResponseEntity<ResponseHttp> create(BookCreateDto bookCreateDto) {
+    public BookService(BookRepository bookRepository, CategoryRepository categoryRepository) {
+        this.bookRepository = bookRepository;
+        this.categoryRepository = categoryRepository;
+    }
+
+    public ResponseEntity<ResponseHttp> create(BookCreateDto bookCreateDto) {
 		Optional<Category> categoryOptional = categoryRepository.findById(bookCreateDto.getCategoryId());
 		if (categoryOptional.isEmpty())
 			return new ResponseEntity<>(new ResponseHttp(204, "Categoria no encontrada"), HttpStatus.NO_CONTENT);

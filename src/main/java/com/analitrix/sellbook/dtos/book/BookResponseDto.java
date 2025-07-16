@@ -1,11 +1,9 @@
 package com.analitrix.sellbook.dtos.book;
 
 import com.analitrix.sellbook.models.Category;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@EqualsAndHashCode
 @Getter
 @Setter
 @AllArgsConstructor

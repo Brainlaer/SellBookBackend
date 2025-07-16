@@ -1,52 +1,53 @@
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/jwt/JwtService.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookGetDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/InvoiceBook.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/UserRepository.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/CategoryDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/config/SecurityConfig.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserRequestDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/User.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Category.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/InvoiceController.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookPostDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/BookRepository.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/UserController.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/SortEnum.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/CategoryService.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/helpers/dto/ResponseHttp.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/BookController.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/UserService.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/auth/LoginRequest.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/config/ApplicationConfig.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookSortableColumnsEnum.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/InvoiceRepository.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookRequestDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserDeleteDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/helpers/dto/RequestGetDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/BookService.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Invoice.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/helpers/dto/FilterDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookSpecifications.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/InvoiceUserRepository.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserPutDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/InvoiceUser.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/AuthService.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/SellbookApplication.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/helpers/dto/FlattenDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserGetDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/CategoryRepository.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/CategoryController.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Book.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/jwt/JwtAuthenticationFilter.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/TrackingRepository.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/controller/AuthController.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserSpecifications.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/book/BookPutDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/repository/InvoiceBookRepository.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/user/UserSortableColumnsEnum.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/service/InvoiceService.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/auth/AuthResponse.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/InvoiceCreateDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/PaginationDto.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/dto/auth/RegisterRequest.java
-/home/brayan/Documents/Workspace/Sellbook/SellBookBackend/src/main/java/com/analitrix/sellbook/entity/Tracking.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/user/UserResponseDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/specifications/BookSpecifications.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/auth/RegisterRequestDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/repositories/UserRepository.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/models/Invoice.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/models/Tracking.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/configs/ApplicationConfig.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/user/UserDeleteDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/models/Category.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/invoice/InvoiceCreateDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/models/InvoiceBook.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/repositories/InvoiceUserRepository.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/repositories/TrackingRepository.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/specifications/UserSpecifications.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/auth/AuthResponseDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/repositories/CategoryRepository.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/SellbookApplication.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/user/UserUpdateDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/security/JwtService.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/services/CategoryService.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/category/CategoryCreateDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/models/Book.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/controllers/AuthController.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/services/BookService.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/controllers/CategoryController.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/controllers/BookController.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/invoice/InvoiceRequestDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/services/InvoiceService.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/configs/SecurityConfig.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/book/BookRequestDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/book/BookCreateDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/book/BookResponseDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/enums/SortEnum.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/specifications/InvoiceSpecifications.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/common/FlattenDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/invoice/InvoiceSortableColumnsEnum.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/security/JwtAuthenticationFilter.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/enums/UserSortableColumnsEnum.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/common/ResponseHttp.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/repositories/InvoiceRepository.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/services/AuthService.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/enums/BookSortableColumnsEnum.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/controllers/UserController.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/common/PaginationDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/user/UserRequestDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/models/InvoiceUser.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/auth/LoginRequestDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/models/User.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/services/UserService.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/controllers/InvoiceController.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/dtos/book/BookUpdateDto.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/repositories/InvoiceBookRepository.java
+/home/bsvanegas/Documentos/Java projects/SellBookBackend/src/main/java/com/analitrix/sellbook/repositories/BookRepository.java
